@@ -1,13 +1,12 @@
-const asynchander = (requestHandler)=>
-{
-    (req,res,next)=>{
-        Promise
-        .resolve(requestHandler(req,res,next))
-        .catch((err)=>next(err))
+const asynchandler = (requesthandler) => {
+    return (req, res, next) => {
+        Promise.resolve(requesthandler(req, res, next)).catch((err) => next(err))
     }
 }
 
-export {asynchander}
+
+export { asynchandler }
+
 
 // const asynchander = (fn)=>async(req,res,next)=>{
 //     try{
