@@ -20,7 +20,7 @@ const registerUser = asynchandler(async (req, res) => {
 
 
   const { fullname, email, username, password } = req.body
-
+  console.log(req.body);
   if (
     [fullname, email, username, password].some((field) => field?.trim() === "")
   ) {
@@ -28,10 +28,10 @@ const registerUser = asynchandler(async (req, res) => {
   }
 
 
-  const existedUser = User.findOne({
+  const existedUser = await User.findOne({
     $or: [{ username }, { email }]
   })
-
+    console.log(existedUser);
     if(existedUser)
     {
       throw new apierror(409,"username or email is already exist");
@@ -39,36 +39,46 @@ const registerUser = asynchandler(async (req, res) => {
    
     const avatarLocalpath = req.files?.avatar[0]?.path;
     const coverImageLocalpath = req.files?.coverImage[0]?.path;
+    console.log(req.files);
+    console.log(avatarLocalpath)
+    console.log(coverImageLocalpath)
+
     if(!avatarLocalpath)
     {
       throw new apierror(400,"Avatar  file is required")
     }
 
     const avatar = await uploadoncloudinary(avatarLocalpath)
+    console.log(avatar)
+
     const coverImage = await uploadoncloudinary(coverImageLocalpath)
+    console.log(coverImage);
+    
     if(!avatar){
       throw new apierror(400,"Avatar  file is required")
-
     }
-
+     
    const user =  await User.create({
       fullname,
       avatar:avatar.url,
       coverImage:coverImage?.url||"",
+      email,
       password,
-      username:username.toLowerCase()
+      username: username.toLowerCase()
     })
+
+    console.log(user)
     const createdusername = await User.findById(user._id).select(
       "-password -refreshToken"
     )
-
+    console.log(createdusername)
     if(!createdusername)
     {
       throw new apierror(500,"something went wrong while reginstering the user")
     }
 
     return res.status(201).json(
-      new apierror(200,createdusername,"somethig went wrong");
+      new apiresponse(200,createdusername,"somethig went wrong")
     )
 }) 
 

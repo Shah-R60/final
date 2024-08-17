@@ -17,13 +17,13 @@ import fs from 'fs'
                 return null
             }
             //upload the file on cloudinary
-            else{
                const response = await cloudinary.uploader.upload(localfilepath,{
                     resource_type:"auto"
                 })
-                console.log("file is upload on cloudinary",response.url);
+                // console.log("file is upload on cloudinary",response.url);
+                fs.unlinkSync(localfilepath)
                 return response;
-            }
+
             //file has been upload successfull
         }catch(error){
             fs.unlinkSync(localfilepath)//remove the
