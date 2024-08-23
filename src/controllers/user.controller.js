@@ -5,6 +5,7 @@ import {uploadoncloudinary} from "../utils/cloudnary.js"
 import { upload } from "../middlewares/multer.middleware.js"
 import { apiresponse } from "../utils/apiresponce.js"
 import jwt from "jsonwebtoken";
+import mongoose from "mongoose"
 const generateAccessTokenandrefreshToken= async(userId)=>
 {
      try{
@@ -238,7 +239,7 @@ const changeCurrentPassword = asynchandler(async(req,res)=>{
     await user.save({validateBeforeSave:false})
     return res
     .status(200)
-    .json(new apiresponse(200,"password changed successfully"))
+    .json(new apiresponse(200,user,"password changed successfully"))
 
 })
 
@@ -269,7 +270,7 @@ const updateAccountDetails = asynchandler(async(req,res)=>{
 
   return res
   .status(200)
-  .json(new apiresponse(200,user,"Account details updated successfully"))
+  .json(new apiresponse(200,req.user,"Account details updated successfully"))
 })
 
 
@@ -301,7 +302,7 @@ const updatedUserAvatar = asynchandler(async(req,res)=>{
   return res
         .status(200)
         .json(
-          new apiresponse(200,user,"cover Image updated")
+          new apiresponse(200,req.user,"cover Image updated")
         )
 
 })
@@ -333,9 +334,145 @@ const updatedUsercoverImage = asynchandler(async(req, res) => {
         return res
         .status(200)
         .json(
-          new apiresponse(200,user,"cover Image updated")
+          new apiresponse(200,req.user,"cover Image updated")
         )
 })
+
+
+const getUserChannelProfile = asynchandler(async(req,res)=>{
+
+  const {username} = req.params
+  if(!username?.trim()){
+    throw new apierror(400,"username is missing")
+  }
+   const channel =  await User.aggregate([
+    {
+      $match:{
+        username:username?.toLowerCase()
+        }
+
+    },
+    {
+      $lookup:{
+        from: "subscription",
+        localField: "_id",
+        foreignField: "channel",
+        as:"subscribers"
+      }
+    },
+    {
+      $lookup:{
+        from:"subscription",
+        localField:"_id",
+        foreignField:"subscriber",
+        as:"subscribedTo"
+      }
+    },
+    {
+      $addFields:{
+        subscribersCount:{
+          $size: "$subscribers"
+        },
+        channelsSubscribedToCount: {
+          $size: "$subscribedTo"
+        },
+        isSubscribed:{
+          $cond:{
+            if:{$in:[req.user?._id,"$subscribers.subscriber"]},
+            then:true,
+            else:false
+          }
+        }
+      }
+    },
+    {
+      $project:{
+        fullname:1,
+        username:1,
+        subscribersCount:1,
+        isSubscribed:1,
+        avatar:1,
+        coverImage:1,
+        email:1
+      }
+    }
+
+   ])
+
+   if(!channel?.length)
+   {
+    throw new apierror(404,"channel does not exists");
+   }
+
+   return res
+   .status(200)
+   .json(
+    new apiresponse(200,channel[0],"User chennal fatched successfully")
+   )
+})
+
+
+
+
+const getwatchHistory = asynchandler(async(req,res)=>{
+    const user = await User.aggregate([
+      {
+        $match:{
+          _id: new mongoose.Types.ObjectId(req.user?._id)
+        }
+      },
+      {
+        $lookup:{
+          from:"video",
+          localField:"watchHistory",
+          foreignField:"-id",
+          as:"watchHistory",
+          pipeline:[
+            {
+              $lookup:{
+                from:"users",
+                localField:"owner",
+                foreignField:"-id",
+                as:"owner",
+                pipeline:[
+                  {
+                    $project:{
+                      fullname:1,
+                      username:1,
+                      avatar:1
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              $addFields:{
+                owner:{
+                   $first:"$owner"
+                }
+              }
+            }
+          ]
+        }
+
+
+      }
+    ])
+
+
+    return res
+    .status(200)
+    .json(
+      new apiresponse(
+        200,
+        user[0].getwatchHistory,
+      "watch History fetched successfully"
+      )
+    )
+})
+
+
+ 
 
 
 export { 
@@ -347,5 +484,7 @@ export {
   getCurrentUser,
   updateAccountDetails,
   updatedUserAvatar,
-  updatedUsercoverImage
+  updatedUsercoverImage,
+  getUserChannelProfile,
+  getwatchHistory
 };
