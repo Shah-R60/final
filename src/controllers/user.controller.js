@@ -179,15 +179,18 @@ const logoutUser = asynchandler(async(req,res)=>{
 const refreshAccessToken = asynchandler(async (req,res)=>{
   console.log("in controller refresh token");
   const incomingrefreshtoken = req.cookies.refreshToken||req.body.refreshToken
+     console.log(incomingrefreshtoken);
   if(!incomingrefreshtoken){
     throw new apierror(401,"unauthorized request");
   }
+  console.log("reach");
 try {
-  
+        console.log(incomingrefreshtoken);
     const decodedtoken = jwt.verify(
       incomingrefreshtoken,
       process.env.REFRESH_TOKEN_SECRET
     )
+    console.log("reach");
     console.log("decoded token",decodedtoken);
   
     const user =await User.findById(decodedtoken?._id)
@@ -195,9 +198,9 @@ try {
       throw new apierror(401,"unauthorized request");
     }
   
-    if(incomingrefreshtoken!==user?.refreshAccessToken)
+    if(incomingrefreshtoken!==user?.refreshToken)
     {
-      throw new apierror(401,"Invalid refresh token");
+      throw new apierror(401,"Refresh token is expired or used");
     }
   
     const options={
@@ -230,12 +233,16 @@ const changeCurrentPassword = asynchandler(async(req,res)=>{
   const {oldPassword,newPassword}= req.body
 
   const user = await User.findById(req.user?._id)
-  const isPasswordValid = await user.isPasswordCorrect(password)
+  console.log(user);
+  const isPasswordValid = await user.isPasswordCorrect(oldPassword)
+  console.log(isPasswordValid);
+
   if(!isPasswordValid){
     throw new apierror(401,"invalid old password")
     }
 
     user.password = newPassword;
+    console.log(user.password);
     await user.save({validateBeforeSave:false})
     return res
     .status(200)
@@ -257,7 +264,7 @@ const updateAccountDetails = asynchandler(async(req,res)=>{
     throw new apierror(400,"fullname and email are required")
   }
 
-  User.findByIdAndUpdate(
+  const user = await User.findByIdAndUpdate(
     req.user?._id,
     {
       $set:{
@@ -266,11 +273,13 @@ const updateAccountDetails = asynchandler(async(req,res)=>{
       }
     },
     {new:true}
-  ).select("-password" )
 
+  ).select("-password" )
+  console.log(user.email);
+  console.log(user.fullname);
   return res
   .status(200)
-  .json(new apiresponse(200,req.user,"Account details updated successfully"))
+  .json(new apiresponse(200,user,"Account details updated successfully"))
 })
 
 
@@ -286,7 +295,7 @@ const updatedUserAvatar = asynchandler(async(req,res)=>{
     throw new apierror(400,"Avatar upload failed")
   }
 
-  User.findByIdAndUpdate(
+  const user = await User.findByIdAndUpdate(
     req.user?._id,
     {
       $set:{
@@ -302,7 +311,7 @@ const updatedUserAvatar = asynchandler(async(req,res)=>{
   return res
         .status(200)
         .json(
-          new apiresponse(200,req.user,"cover Image updated")
+          new apiresponse(200,user,"cover Image updated")
         )
 
 })
@@ -319,104 +328,103 @@ const updatedUsercoverImage = asynchandler(async(req, res) => {
           throw new apierror(400, "coverImage upload failed")
       }
 
-  User.findByIdAndUpdate(
-      req.user ?._id,
-      {
-        $set: {
-          coverImage:coverImage.url
-        }
-      }
-      , {
-        new:true
-      }
-          ).select("-password")
+      const user = await User.findByIdAndUpdate(
+        req.user?._id,
+        {
+            $set:{
+                coverImage: coverImage.url
+            }
+        },
+        {new: true}
+    ).select("-password")
+
 
         return res
         .status(200)
         .json(
-          new apiresponse(200,req.user,"cover Image updated")
+          new apiresponse(200,user,"cover Image updated")
         )
 })
 
 
-const getUserChannelProfile = asynchandler(async(req,res)=>{
-
+const getUserChannelProfile = asynchandler(async(req, res) => {
   const {username} = req.params
-  if(!username?.trim()){
-    throw new apierror(400,"username is missing")
+
+  if (!username?.trim()) {
+      throw new apierror(400, "username is missing")
   }
-   const channel =  await User.aggregate([
-    {
-      $match:{
-        username:username?.toLowerCase()
-        }
 
-    },
-    {
-      $lookup:{
-        from: "subscription",
-        localField: "_id",
-        foreignField: "channel",
-        as:"subscribers"
-      }
-    },
-    {
-      $lookup:{
-        from:"subscription",
-        localField:"_id",
-        foreignField:"subscriber",
-        as:"subscribedTo"
-      }
-    },
-    {
-      $addFields:{
-        subscribersCount:{
-          $size: "$subscribers"
-        },
-        channelsSubscribedToCount: {
-          $size: "$subscribedTo"
-        },
-        isSubscribed:{
-          $cond:{
-            if:{$in:[req.user?._id,"$subscribers.subscriber"]},
-            then:true,
-            else:false
+  const channel = await User.aggregate([
+      {
+          $match: {
+              username: username?.toLowerCase()
           }
-        }
+      },
+    
+      {
+          $lookup: {
+              from: "subscriptions",
+              localField: "_id",
+              foreignField: "channel",
+              as: "noOfSubscribers"
+          }
+      },
+      {
+          $lookup: {
+              from: "subscriptions",
+              localField: "_id",
+              foreignField: "subscriber",
+              as: "meSubscripedToHowMany"
+          }
+      },
+      {
+          $addFields: {
+              subscribersCount: {
+                  $size: "$noOfSubscribers"
+              },
+              channelsSubscribedToCount: {
+                  $size: "$meSubscripedToHowMany"
+              },
+              isSubscribed: {
+                  $cond: {
+                      if: {$in: [req.user?._id, "$noOfSubscribers.subscriber"]},
+                      then: true,
+                      else: false
+                  }
+              }
+          }
+      },
+      {
+          $project: {
+              fullName: 1,
+              username: 1,
+              subscribersCount: 1,
+              channelsSubscribedToCount: 1,
+              isSubscribed: 1,
+              avatar: 1,
+              coverImage: 1,
+              email: 1
+
+          }
       }
-    },
-    {
-      $project:{
-        fullname:1,
-        username:1,
-        subscribersCount:1,
-        isSubscribed:1,
-        avatar:1,
-        coverImage:1,
-        email:1
-      }
-    }
+  ])
 
-   ])
+  if (!channel?.length) {
+      throw new apierror(404, "channel does not exists")
+  }
 
-   if(!channel?.length)
-   {
-    throw new apierror(404,"channel does not exists");
-   }
-
-   return res
-   .status(200)
-   .json(
-    new apiresponse(200,channel[0],"User chennal fatched successfully")
-   )
+  return res
+  .status(200)
+  .json(
+      new apierror(200, channel[0], "User channel fetched successfully")
+  )
 })
-
 
 
 
 const getwatchHistory = asynchandler(async(req,res)=>{
     const user = await User.aggregate([
-      {
+    {
         $match:{
           _id: new mongoose.Types.ObjectId(req.user?._id)
         }
