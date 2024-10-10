@@ -6,6 +6,7 @@ import { upload } from "../middlewares/multer.middleware.js"
 import { apiresponse } from "../utils/apiresponce.js"
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose"
+
 const generateAccessTokenandrefreshToken= async(userId)=>
 {
      try{
@@ -14,7 +15,7 @@ const generateAccessTokenandrefreshToken= async(userId)=>
         const accessToken = user.generateAccessToken()
         const refreshToken = user.generateRefreshToken()
         console.log("accesstoken and refreshtoken is generated");
-        
+
         user.refreshToken=refreshToken
         user.save({validateBeforeSave:false})
 
@@ -71,7 +72,7 @@ const registerUser = asynchandler(async (req, res) => {
     const avatar = await uploadoncloudinary(avatarLocalpath)
     const coverImage = await uploadoncloudinary(coverImageLocalpath)
     
-    
+  
     if(!avatar){
       throw new apierror(400,"Avatar  file is required")
     }
@@ -462,8 +463,6 @@ const getwatchHistory = asynchandler(async(req,res)=>{
             }
           ]
         }
-
-
       }
     ])
 

@@ -13,6 +13,10 @@
   "author": "shah rahul",
   "license": "ISC",
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.7",
+    "@types/cors": "^2.8.17",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/multer": "^1.4.12",
     "nodemon": "^3.1.4",
     "prettier": "^3.3.3"
   },

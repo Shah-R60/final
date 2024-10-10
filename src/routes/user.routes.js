@@ -15,15 +15,11 @@ router.route("/register").post(
     }
    ]),
     registerUser
-    )
+)
 
-
-console.log("1");
 router.route("/login").post(loginUser)
 //secured routesc
-console.log("2");
 router.route("/logout").post(verifyJWT, logoutUser)
-console.log("3");
 router.route("/refresh-token").post(refreshAccessToken)
 router.route("/change-password").post(verifyJWT,changeCurrentPassword),
 router.route("/current-user").get(verifyJWT,getCurrentUser),
