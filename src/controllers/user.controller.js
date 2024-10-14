@@ -5,8 +5,11 @@ import {uploadoncloudinary} from "../utils/cloudnary.js"
 import { upload } from "../middlewares/multer.middleware.js"
 import { apiresponse } from "../utils/apiresponce.js"
 import jwt from "jsonwebtoken";
-import mongoose from "mongoose"
+import mongoose from "mongoose";
+import mongodb from "mongodb";
 
+
+// ******************************** generate AccessToken and refreshToken*************************
 const generateAccessTokenandrefreshToken= async(userId)=>
 {
      try{
@@ -28,7 +31,7 @@ const generateAccessTokenandrefreshToken= async(userId)=>
 }
 
 
-
+// ******************************register*********************************
 const registerUser = asynchandler(async (req, res) => {
 
 // get user details from frontend
@@ -60,7 +63,8 @@ const registerUser = asynchandler(async (req, res) => {
    
     const avatarLocalpath = req.files?.avatar[0]?.path;
     const coverImageLocalpath = req.files?.coverImage[0]?.path;
-   
+    console.log(avatarLocalpath);
+    console.log(coverImageLocalpath);
     if(!avatarLocalpath)
     {
       throw new apierror(400,"Avatar  file is required")
@@ -71,7 +75,8 @@ const registerUser = asynchandler(async (req, res) => {
 
     const avatar = await uploadoncloudinary(avatarLocalpath)
     const coverImage = await uploadoncloudinary(coverImageLocalpath)
-    
+    console.log(avatar);
+    console.log(coverImage);
   
     if(!avatar){
       throw new apierror(400,"Avatar  file is required")
@@ -98,7 +103,7 @@ const registerUser = asynchandler(async (req, res) => {
     )
 }) 
 
-
+// ***********************************login***************************************
 const loginUser = asynchandler(async (req,res)=>{
   // req body->data,
   // username or email
@@ -152,6 +157,8 @@ const loginUser = asynchandler(async (req,res)=>{
   
 })
 
+
+// ********************************logout***************************
 const logoutUser = asynchandler(async(req,res)=>{
   console.log("in controller logout user");
      await User.findByIdAndUpdate(
@@ -164,12 +171,12 @@ const logoutUser = asynchandler(async(req,res)=>{
          new: true
     }
      )
-
+     
      const options = {
       httpOnly: true,
       secure:true
      }
-     console.log("ready to send");
+     console.log(req.user._id);
      return res
      .status(200)
      .clearCookie("accessToken",options)
@@ -177,6 +184,18 @@ const logoutUser = asynchandler(async(req,res)=>{
      .json(new apiresponse(200,"user is logged out successfully"))
 })
 
+// **************************delete **************
+
+
+const deleteuser = asynchandler(async(req,res)=>{
+ const store =  await User.findById(req.user._id);
+  console.log(store._id);
+  await User.deleteOne({_id: (store._id)})
+    res.status(200)
+    .json(new apiresponse(200,"successfull"));
+})
+
+// ***************************refreshToken*************************************************
 const refreshAccessToken = asynchandler(async (req,res)=>{
   console.log("in controller refresh token");
   const incomingrefreshtoken = req.cookies.refreshToken||req.body.refreshToken
@@ -226,7 +245,7 @@ try {
   throw new apierror(401,error?.message||"invalid refresh token")
 }
 
-
+// **********************************change Current Password**************************************
   
 })
 
@@ -234,16 +253,15 @@ const changeCurrentPassword = asynchandler(async(req,res)=>{
   const {oldPassword,newPassword}= req.body
 
   const user = await User.findById(req.user?._id)
-  console.log(user);
+ 
   const isPasswordValid = await user.isPasswordCorrect(oldPassword)
-  console.log(isPasswordValid);
-
+ 
   if(!isPasswordValid){
     throw new apierror(401,"invalid old password")
     }
 
     user.password = newPassword;
-    console.log(user.password);
+    
     await user.save({validateBeforeSave:false})
     return res
     .status(200)
@@ -251,12 +269,16 @@ const changeCurrentPassword = asynchandler(async(req,res)=>{
 
 })
 
+
+
+
+// *******************get current user*********************************************
 const getCurrentUser =  asynchandler(async(req,res)=>{
   return res
   .status(200)
   .json(new apiresponse(200,req.user,"user fetch successfully"))
 })
-
+// *********************update account detail***********
 const updateAccountDetails = asynchandler(async(req,res)=>{
   const {fullname,email}=req.body
 
@@ -269,21 +291,21 @@ const updateAccountDetails = asynchandler(async(req,res)=>{
     req.user?._id,
     {
       $set:{
-        fullname,
+        fullname:fullname,
         email:email
       }
     },
     {new:true}
 
   ).select("-password" )
-  console.log(user.email);
-  console.log(user.fullname);
+  
   return res
   .status(200)
   .json(new apiresponse(200,user,"Account details updated successfully"))
 })
 
 
+// ******************************updated UserAvatar************************************************
 const updatedUserAvatar = asynchandler(async(req,res)=>{
   const  avatarLocalpath=req.file?.path
   
@@ -317,6 +339,8 @@ const updatedUserAvatar = asynchandler(async(req,res)=>{
 
 })
 
+
+// ******************************************update coverImage*********************************
 const updatedUsercoverImage = asynchandler(async(req, res) => {
   const  coverImageLocalpath = req.file?.path
 
@@ -347,7 +371,7 @@ const updatedUsercoverImage = asynchandler(async(req, res) => {
         )
 })
 
-
+// *****************************get user channel profile*****************************
 const getUserChannelProfile = asynchandler(async(req, res) => {
   const {username} = req.params
 
@@ -361,7 +385,6 @@ const getUserChannelProfile = asynchandler(async(req, res) => {
               username: username?.toLowerCase()
           }
       },
-    
       {
           $lookup: {
               from: "subscriptions",
@@ -422,7 +445,7 @@ const getUserChannelProfile = asynchandler(async(req, res) => {
 })
 
 
-
+// ******************************get watch History****************************
 const getwatchHistory = asynchandler(async(req,res)=>{
     const user = await User.aggregate([
     {
@@ -493,5 +516,6 @@ export {
   updatedUserAvatar,
   updatedUsercoverImage,
   getUserChannelProfile,
-  getwatchHistory
+  getwatchHistory,
+  deleteuser
 };
