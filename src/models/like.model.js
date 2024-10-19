@@ -1,6 +1,6 @@
 import mongoose,{Schema} from "mongoose";
-import { comment } from "./comment.model";
-import { Video } from "./video.model";
+import { comment } from "./comment.model.js";
+import { Video } from "./video.model.js";
 
 const likeSchema = new Schema({
    comment:{
@@ -21,7 +21,4 @@ const likeSchema = new Schema({
    }
 },{timestamps:true})
 
-
-
-likeSchema.plugin(mongooseAggregatePaginate)
-export const like  = mongoose.model("like",likeSchema);
+export const Like  = mongoose.model("Like",likeSchema);
