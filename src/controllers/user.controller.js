@@ -457,7 +457,7 @@ const getwatchHistory = asynchandler(async(req,res)=>{
         $lookup:{
           from:"video",
           localField:"watchHistory",
-          foreignField:"-id",
+          foreignField:"_id",
           as:"watchHistory",
           pipeline:[
             {
@@ -495,7 +495,7 @@ const getwatchHistory = asynchandler(async(req,res)=>{
     .json(
       new apiresponse(
         200,
-        user[0].getwatchHistory,
+        user[0].watchHistory,
       "watch History fetched successfully"
       )
     )
