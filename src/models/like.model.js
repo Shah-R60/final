@@ -1,5 +1,5 @@
 import mongoose,{Schema} from "mongoose";
-import { comment } from "./comment.model.js";
+import { Comment } from "./comment.model.js";
 import { Video } from "./video.model.js";
 
 const likeSchema = new Schema({
