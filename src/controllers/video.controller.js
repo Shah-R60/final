@@ -107,6 +107,16 @@ const getVideoById = asynchandler(async (req, res) => {
         throw new apierror(404,"video is not found")
     }
 
+    //increasing value of view for every call
+    await Video.updateOne(
+        {
+            _id:video._id
+        },
+        {
+           $inc:{views:1}
+        }
+    )
+
     return res.status(200)
     .json(
         new apiresponse(200,video,"video is found by id ")
@@ -138,9 +148,19 @@ const getVideoByTitle = asynchandler(async (req, res) => {
                 owner:1,
                 views:1,
                 description:1
+                }
             }
+    ])
+    
+       const videoId = video[0]._id;
+    await Video.updateMany(
+        {
+            _id:videoId
+        },
+        {
+        $inc:{views:1}
         }
-])
+    )
      
   return res.status(200)
     .json(
