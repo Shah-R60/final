@@ -1,0 +1,287 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'poppins',sans-serif;
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration: none;
+    color: #5a5a5a;
+}
+
+img{
+    cursor: pointer;
+}
+
+.flex-div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.nav-left{
+    width: 150px;
+    height: 30px;
+   /* border: 1px solid red; */
+   justify-content: space-evenly;
+   display: flex;
+    flex-direction: row;
+    
+}
+
+
+.nav-right{
+    width: 200px;
+    height: 30px;
+   /* border: 2px solid red; */
+   justify-content: space-around;
+   display: flex;
+    flex-direction: row;
+}
+
+nav{
+    padding: 10px 2%;
+    justify-content: space-between;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    background: #fff;
+    position: sticky;
+    top:0;
+    z-index: 10;
+}
+
+#avatar{
+    width: 30px;
+    border-radius: 50%;
+    margin-right: 0px;
+}
+
+.nav-left .menu_icon{
+    /* border: 2px solid red; */
+   width: 30px;
+   margin-right:10px ;
+}
+
+.nav-right img{
+    width: 25px;
+    height: 25px;
+}
+
+.nav-middle{
+    width: 300px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+}
+.search-box{
+    width: 300px;
+    height: 40px;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-right: 15px;
+    padding: 8px 12px;
+    border-radius: 25px;
+}
+
+.nav-middle .search-box input{
+    width: 400px;
+    border: 0px;
+    outline: opx;
+    background: transparent;
+}
+
+.nav-middle .search-box img{
+    width: 20px;
+    height: 20px;
+    margin-top: 3px;
+}
+/* -------------sidebar-------------------*/
+.sidebar{
+    background: #fff;
+    width: 20%;
+    height: 100vh;
+    position: fixed;
+    /* border: 1px solid red; */
+    top: 0px;
+    padding-left: 2%;
+    margin-top: 60px;
+}
+
+.shortcut-link a{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 2%;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    /* border: 1px solid red; */
+   
+}
+
+
+.shortcut-link a img{
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+    
+}
+
+.shortcut-link .short{
+    display: flex;
+    flex-direction: row;
+    justify-content:flex-start;
+}
+
+.shortcut-link a:first-child{
+    color: #ed3833;
+}
+
+.sidebar hr{
+    border: 0px;
+    height: 1px;
+    background: #a1a0a0;
+    width: 85%;
+}
+
+.subscribed-list h3{
+    font-size: 13px;
+    margin: 20px 0;
+    color: #fc1e1e;
+}
+
+.subscribed-list a{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+    width: fit-content;
+    flex-wrap: wrap;
+}
+
+.subscribed-list a img{
+    width: 25px;
+    border-radius: 50%;
+    margin-right: 20px;
+
+}
+
+.small-sidebar{
+    width: 5%;
+}
+
+.small-sidebar a p{
+  display: none;
+
+}
+
+.small-sidebar h3{
+    display: none;
+}
+
+.small-sidebar hr{
+    width: 50%;
+    margin-bottom: 25px;
+    display: none;
+}
+
+
+ /* --------------main------------ */
+
+
+.container{
+    background:#f9f9f9;
+    padding-left: 21%;
+    padding-right: 2%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.large-container{
+    padding-left: 8%;
+}
+
+.banner{
+    width: 100%;
+}
+
+.banner img{
+    width: 100%;
+    border-radius: 8px;
+}
+
+.list-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    grid-column-gap: 16px;
+    grid-row-gap: 30px;
+    margin-top: 15px;
+
+}
+
+.vidlist  .thumbnail{
+  width: 100%;
+  border-radius: 5px;
+  /* margin-left: 2px; */
+}
+
+.vidlist .flex-div{
+    align-items: flex-start;
+    margin-top: 7px;
+}
+
+.vidlist .flex-div img{
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.video-info{
+    color: #5a5a5a;
+    font-size: 13px;
+}
+
+.video-info a{
+    color: black;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+}
+
+
+@media (max-width:900px)
+{
+    .menu_icon{
+        display: none;
+    }
+
+    .sidebar{
+        display: none;
+    }
+    .container , .large-container{
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .nav-right img{
+        display: none;
+    }
+    .nav-right #avatar{
+        display: block;
+        width: 30px;
+    }
+
+    .nav-middle .search-box input{
+        width: 100px;
+    }
+
+    .nav-middle .mike_icon{
+        display: none;
+    }
+    .logo{
+        width: 90px;
+    }
+}
