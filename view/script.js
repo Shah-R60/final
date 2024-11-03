@@ -67,3 +67,26 @@ async function show_video(){
 }
 
 show_video()
+
+// ------------upload-------
+// const upload = document.querySelector('.upload')
+// upload.addEventListener('click', (event) => {
+//   const ul = document.createElement('ul');
+//   ul.className = "upload_ul"
+//   const li1 = document.createElement('li');
+//   li1.className = "upload_video_li"
+//   const li2 = document.createElement('li');
+//   li2.className = "upload_video_li"
+//   li1.innerHTML = "<p>upload Video</p>"
+//   li2.innerHTML = "<p>upload post</p>"
+//   ul.appendChild(li1);
+//   ul.appendChild(li2);
+//   upload.appendChild(ul);
+// })
+
+const upload = document.querySelector('.upload');
+const sub_class = document.querySelector('.sub-class');
+
+upload.onclick = function(){
+  sub_class.classList.toggle("larger_ul")
+}
