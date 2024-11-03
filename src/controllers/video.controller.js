@@ -22,28 +22,51 @@ const getAllVideos = asynchandler(async (req, res) => {
         store.title = { $regex: query, $options: 'i' }
     }
     if(userId){
-        store.userId = userId;
+        store.owner = userId;
     }
 
     try{
-        const videos = await Video.find(store)
-        .sort({[sortBy]:sortType==='asc'?1:-1})
-        .skip((pageNumber-1)*limitNumber)
-        .limit(limitNumber);
 
-        const totalvideos = await Video.countDocuments(store);
-        
+      const ans =  await Video.aggregate([
+        {
+            $match:store
+        },
+
+            {
+              $lookup:{
+                 from:"users",
+                 localField:"owner",
+                 foreignField:"_id",
+                 as:"userInfo"
+              }
+            },
+            {
+                $addFields:{
+                    avatar: "$userInfo.avatar"
+                }
+            },
+            {
+                $sort: { [sortBy]: sortType === 'asc' ? 1 : -1 }
+            },{
+                $skip: (pageNumber - 1) * limitNumber
+            },
+            {
+                $limit: limitNumber 
+            },{
+                $project:{
+                    userInfo:0
+                }
+            }
+            ])
+        // const totalvideos = await Video.countDocuments(store);
         return res.status(200).json(
-            new apiresponse(200,videos,"get all videos")
-          );
+            new apiresponse(200,ans,"get all videos")
+        );
     }
     catch(err)
     {
-        throw new apierror(500,"something went wrong while generating refresh and access token");
+        throw new apierror(500,"something went wrong");
     }
-
-  
-
 })
 
 //publish video**********************
@@ -249,12 +272,38 @@ const togglePublishStatus = asynchandler(async (req, res) => {
 })
 //TODO: toggle publish status
 
+const IncreaseView = asynchandler(async(req,res)=>{
+    const {videoId} = req.params
+    if(!videoId?.trim())
+    {
+        throw new apierror(400,"videoId is necessary")
+    }
+
+   const increaseV =  await Video.updateMany(
+        {
+            _id:videoId
+        },
+        {
+        $inc:{views:1}
+        }
+    )
+    if(!increaseV)
+    {
+        throw new apierror(400,"there is some problem at server side")
+    }
+
+    res.status(200).json(
+        new apiresponse(200,"okk")
+    )
+})
+
 export {getAllVideos,
        publishAVideo,
        getVideoById,
        getVideoByTitle,
        updateVideo,
        deleteVideo,
-       togglePublishStatus
+       togglePublishStatus,
+       IncreaseView
 };
 

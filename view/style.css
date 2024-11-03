@@ -187,6 +187,10 @@ nav{
     display: none;
 }
 
+.small-sidebar .subscribed-list{
+    display: none;
+}
+
 
  /* --------------main------------ */
 
@@ -214,7 +218,7 @@ nav{
 
 .list-container{
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
     grid-column-gap: 16px;
     grid-row-gap: 30px;
     margin-top: 15px;
@@ -223,6 +227,8 @@ nav{
 
 .vidlist  .thumbnail{
   width: 100%;
+  height: 240px;
+  /* height: fit-content; */
   border-radius: 5px;
   /* margin-left: 2px; */
 }
