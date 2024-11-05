@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <link rel="stylesheet" href="style.css">
+     <script src="https://kit.fontawesome.com/0a4e95c234.js" crossorigin="anonymous"></script>
+</head>
+<body>
+     <div class="container">
+          <div class="form-box">
+               <h1 id="title">Sign UP</h1>
+               <div class="btn-field">
+                    <button type="button" id="signupBtn">Sign up</button>
+                    <button type="button" class="disable" id="signinBtn">Sign in</button>
+               </div>
+               <form action="#">
+                    <div class="input-group">
+                         <div class="input-field" id="username">
+                              <i class="fa-solid fa-user"></i>
+                              <input type="text" placeholder="Username" class="username">
+                         </div>
+                         <div class="input-field" id="fullname">
+                              <i class="fa-solid fa-user"></i>
+                              <input type="text" placeholder="fullname" class="fullname">
+                         </div>
+
+                         <div class="input-field" >
+                              <i class="fa-solid fa-envelope"></i>
+                              <input type="email" placeholder="email" class="email">
+                         </div>
+                         <div class="input-field" >
+                              <i class="fa-solid fa-lock"></i>
+                              <input type="password" placeholder="password" class="password" >
+                         </div>
+                         <div class="input-field" id="avatar">
+                              <i class="fa-solid fa-user"></i>
+                              <button type="button" class="avatar-but">Avatar</button>
+                              <input type="file" class="avatar" hidden>
+                         </div>
+                         <div class="input-field" id="coverImage">
+                              <i class="fa-solid fa-user"></i>
+                              <button type="button" class="cover-but">coverImage</button>
+                              <input type="file" class="coverImage" hidden>
+                         </div>
+                         <p>Lost password? <a href="#">click here!</a></p>
+                    </div>
+                    <button type="submit" class="submit">Submit</button>
+               </form>
+          </div>
+
+
+     </div>
+</body>
+<script src="script.js"></script>
+</html>

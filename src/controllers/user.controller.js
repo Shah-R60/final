@@ -118,6 +118,7 @@ const loginUser = asynchandler(async (req,res)=>{
   }
 
   console.log("username is available")
+  console.log(email)
   const user = await User.findOne({
     $or:[{username},{email}]
   })
