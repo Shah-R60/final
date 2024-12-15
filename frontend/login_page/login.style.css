@@ -20,13 +20,14 @@
      width: 450px;
      /* position: absolute; 
       top: 50%; */
-     /* border: 1px solid red; */
+     border: 1px solid red;
      /* left:50%; 
      transform: translate(-50%,-50%); */
      background: #fff;
      border-radius: 5px;
      padding: 50px 60px 70px;
      text-align: center;
+
 }
 
 .form-box h1{
@@ -88,7 +89,6 @@ form p a{
      color: #3c00a0;
 }
 
-
 .btn-field{
      width: 100%;
      display: flex;
@@ -97,7 +97,6 @@ form p a{
 }
 
 .btn-field button{
-
      flex-basis: 48%;
      background: #3c00a0;
      color: #fff;
@@ -132,6 +131,16 @@ form p a{
      border-radius: 20px;
      background-color: rgba(174, 161, 252, 0.427);
      cursor: pointer;
+}
+
+.alert
+{
+     display: none;
+     display: flex;
+     flex-direction: row;
+     justify-content: center;
+     padding-top: 20px;
+     color: red;
 }
 
 

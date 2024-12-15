@@ -14,7 +14,6 @@ async function playVideo() {
             catch{
                 console.log("there is something error ..")
             }
-           
         }
     else
     {

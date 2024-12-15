@@ -6,7 +6,7 @@ let email = document.getElementById("email")
 let password = document.getElementById("password")
 let avatar = document.getElementById("avatar")
 let coverimage = document.getElementById("coverImage");
-
+let alt = document.querySelector('.alert');
 let input_username = document.querySelector(".username")
 let input_fullname = document.querySelector(".fullname")
 let input_email = document.querySelector(".email")
@@ -44,8 +44,9 @@ signupBtn.addEventListener("click",()=>{
      flag="signup";
 })
       
-let avatar_res, cover_res;
 
+let avatar_res, cover_res;
+alt.style.display = "none"
 avartar_but.addEventListener("click",()=>{
      input_avatar.click();
 })
@@ -95,7 +96,7 @@ cover_but.addEventListener("click",()=>{
                     }
                     catch(error)
                     {
-                         console.log("error",error)
+                       alert(error)
                     }
                }
                else{
@@ -117,8 +118,17 @@ cover_but.addEventListener("click",()=>{
                         "password":`${input_password.value}`
                     })
                })
+               if (response.statusText == "OK") {
+                    console.log('hii');
+                    const playlink = `/view/index.html?flag=done`;
+                    window.location.href = playlink;
 
-               console.log(response)
+                }
+               else
+               {
+                    alt.style.display = "flex";
+               }
+                            
              }
              else{
                 alert("All field are required");

@@ -7,6 +7,12 @@ menuIcon.onclick = function(){
 }
 
 // --------------main------------
+
+
+
+const link = window.location.search;
+console.log(link);
+
 const list_container = document.querySelector('.list-container')
 
 async function show_video(){
