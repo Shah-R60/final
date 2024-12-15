@@ -48,7 +48,7 @@ async function show_video(){
                   vari = "Minutes ago"
                 }
             }
-            // console.log("shah");
+         
             const playlink = `../frontend/play.folder/play.html?link=${videoLink}&id=${Id}`
            videoHTML += `
                 <div class="vidlist">
