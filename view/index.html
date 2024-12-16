@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <!-- ---------------------------navbar--------------------------- -->
-<body>
+<body >
     <nav class="flex-div">
         <div class="nav-left">
             <img src="../frontend/image.folder/menu.jpg" class="menu_icon">
@@ -35,6 +35,7 @@
                 </li>
                 <li class="nav_li"><img src="../frontend/image.folder/notification.png" class="img2"></li>
                 <li class="nav_li"><img src="../frontend/image.folder/avatar.jpg" id="avatar"></li>
+                <li class="nav_li" id="signInIcon" style="display: none;" ><button class="signInBtn"><img src="../frontend/image.folder/signin.png" id="avatar"><p>sign in</p></button></li>
             </ul> 
         </div>
     </nav>
@@ -49,14 +50,18 @@
 
   <div class="sidebar">
         <div class="shortcut-link">
-            <a href="" class="short"><img src="../frontend/image.folder/home.png" alt=""><p>Home</p> </a>
-            <a href=""  class="short"><img src="../frontend/image.folder/explore.png" alt=""><p>Explore</p></a>
-            <a href="" class="short"><img src="../frontend/image.folder/subscription.png" alt=""><p>Subcriptions</p></a>
-            <a href="" class="short"><img src="../frontend/image.folder/watch_letter.png" alt=""><p>watch Later</p></a>
-            <a href="" class="short"><img src="../frontend/image.folder/history.png" alt=""><p>History</p></a>
+            <a href="" class="short sign"><img src="../frontend/image.folder/home.png" alt=""><p>Home</p> </a>
+            <a href=""  class="short sign"><img src="../frontend/image.folder/explore.png" alt=""><p>Explore</p></a>
+            <a href="" class="short sign"><img src="../frontend/image.folder/subscription.png" alt=""><p>Subcriptions</p></a>
+          <hr>
+            <a href="" class="short sign"><h4>You ></h3></a>
+            <a href="" class="short sign "><img src="../frontend/image.folder/history.png" alt=""><p>History</p></a>
+            <a href="" class="short" ><img src="../frontend/image.folder/watch_letter.png" alt=""><p>watch Later</p></a>
             <a href="" class="short"><img src="../frontend/image.folder/playlist.png" alt=""><p>playlist</p></a>
             <a href="" class="short"><img src="../frontend/image.folder/liked_video.png" alt=""><p>Liked video</p></a>
-         <hr>
+          <hr class="hr">
+            <a href="" class="short singInInfo sign"><p class="info">Sign in to like videos, comment, and subscribe.</p> <button class="signInBtn sidebar_signInBtn"><img src="../frontend/image.folder/signin.png" id="avatar"><p>sign in</p></button> </a>
+          <hr>
         </div>
         
         <div class="subscribed-list">

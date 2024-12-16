@@ -120,9 +120,8 @@ cover_but.addEventListener("click",()=>{
                })
                if (response.statusText == "OK") {
                     console.log('hii');
-                    const playlink = `/view/index.html?flag=done`;
+                    const playlink = `/view/index.html?flag=signin`;
                     window.location.href = playlink;
-
                 }
                else
                {

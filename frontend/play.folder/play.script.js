@@ -1,6 +1,6 @@
 const urlParams = new URLSearchParams(window.location.search);
 const videoLink = document.querySelector('video');
-const   link = urlParams.get('link');
+const link = urlParams.get('link');
 const videoId = urlParams.get('id');
 async function playVideo() {
     if(link)
