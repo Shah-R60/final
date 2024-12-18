@@ -9,11 +9,6 @@ menuIcon.onclick = function(){
 
 
 // --------------main------------
-//check for signin or not
-const urlParams = new URLSearchParams(window.location.search);
-const flag  = urlParams.get('flag');
-console.log(flag);
-
 
 const list_container = document.querySelector('.list-container')
 const banner_container = document.querySelector(".container");
@@ -27,6 +22,13 @@ const sidebar_signInBtn = document.querySelector(".sidebar_signInBtn")
 const subscribe_list = document.querySelector(".subscribed-list")
 const singInInfo = document.querySelector(".singInInfo");
 const hr = document.querySelector(".hr");
+
+//check for signin or not
+const urlParams = new URLSearchParams(window.location.search);
+const flag  = urlParams.get('flag');
+console.log(flag);
+
+
 if(flag=="signin")
 {
         console.log("inside");
@@ -84,13 +86,22 @@ if(flag=="signin")
 
           list_container.innerHTML = videoHTML;
           
+          //  get current user data
+          console.log("hahahaha")
+          const user_data = await fetch('http://localhost:3000/api/v1/user/current-user', {
+            method: 'GET',
+            credentials: 'include' // Ensures cookies are sent
+        });
+        const user = await user_data.json();
+        //  console.log(user.data)
+        console.log(user.data.fullname)
       }
       catch{
 
       }
     }
     show_video()
-
+    
 }
 else
 {
@@ -128,6 +139,7 @@ else
   
      
 }
+
 // ------------upload-------
 // const upload = document.querySelector('.upload')
 // upload.addEventListener('click', (event) => {
@@ -150,3 +162,17 @@ const sub_class = document.querySelector('.sub-class');
 upload.onclick = function(){
   sub_class.classList.toggle("larger_ul")
 }
+
+
+//profile_info
+
+
+const profile_li = document.querySelector('.profile_li');
+const profile_sub_class = document.querySelector('.profile_sub_class');
+
+profile_li.onclick = function(){
+  profile_sub_class.classList.toggle("larger_profile")
+}
+
+
+

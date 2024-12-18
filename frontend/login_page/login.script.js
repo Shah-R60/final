@@ -116,10 +116,17 @@ cover_but.addEventListener("click",()=>{
                     body:JSON.stringify({
                         "email":`${input_email.value}`,
                         "password":`${input_password.value}`
-                    })
+                    }),
+                    credentials:"include"
+
                })
                if (response.statusText == "OK") {
-                    console.log('hii');
+                    const resp = await response.json()
+                    console.log(resp)
+                    console.log(resp.data);
+                    console.log(resp.data.user)
+                    console.log(resp.data.accessToken)
+                    console.log(resp.data.refreshToken)
                     const playlink = `/view/index.html?flag=signin`;
                     window.location.href = playlink;
                 }
