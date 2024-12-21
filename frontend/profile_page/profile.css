@@ -1,0 +1,130 @@
+
+.main{
+     /* border: 2px solid red; */
+     margin-left: 21%;
+     display: flex;
+     flex-direction: column;
+     /* align-items: center; */
+     justify-content: center;  
+     margin-top: 10px;   
+}
+
+.main hr{
+     width: 90%;
+}
+
+.sec{
+     margin-top: 10px;
+}
+
+#sec1{
+     /* border: 2px solid rebeccapurple; */
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+     justify-content: start;
+     padding: 1%;
+}
+
+.channel_logo{
+     width: 150px ;
+     height: 150px;
+     border-radius: 50%;
+     position: relative;
+     /* background-color:black; */
+     transition-property: opacity;
+     transition-duration:.5s ;
+     transition-timing-function: ease-in-out ;
+     background-image: url("/frontend/image.folder/avatar.jpg");
+     background-size: cover;
+     background-position: center;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     cursor: pointer;
+
+}
+
+#logob{
+     position: relative;
+     width: 20px;
+     height: 20px;
+     transition-property: opacity;
+     transition-duration:.5s ;
+     transition-timing-function: ease-in-out ;
+     opacity: 0;
+}
+
+#sec1 .channel_detail{
+     margin-left: 3%;
+}
+
+#sec1 .channel_detail .name{
+   font-size: 50px;
+   font-weight: 500;
+}
+#sec1 .channel_detail  .user_name{
+     margin-top: 5px;
+}
+
+#sec1 .channel_detail .subscriber{
+     margin-top: 3%;
+     font-size: 15px;
+}
+
+#sec1 .channel_detail .edit{
+     width: 60%;
+     height: 30px;
+     margin-top: 4%;
+     border-radius:  30px;
+     outline: none;
+     border: none;
+     font-size: 15px;
+     align-items: center;
+     cursor: pointer;
+}
+
+#sec2 ul{
+     list-style: none;
+     display: inline-flex;
+     margin-bottom: 13px;
+     
+}
+
+#sec2 li{
+     margin-right: 30px;
+     font-size: 17px;
+     font-weight: bold;
+     cursor: pointer;
+}
+
+
+#sec3{
+     width: 100%;
+     height: 60vh;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     /* padding-left: 30%; */
+     padding-right: 10%;
+     justify-content: center;
+     /* border: 2px solid red; */
+}
+
+#sec3 img{
+     width: 150px;
+     height: 150px;
+     margin-bottom: 30px;
+     /* margin-left: 10%; */
+     
+}
+
+
+#sec3 p{
+     margin-bottom: 5px;
+     font-size: 17px;
+     font-weight: 500;
+}
+
+
+

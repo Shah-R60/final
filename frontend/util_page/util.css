@@ -1,0 +1,414 @@
+*{
+     margin: 0;
+     padding: 0;
+     font-family: 'poppins',sans-serif;
+     box-sizing: border-box;
+ }
+ 
+ a{
+     text-decoration: none;
+     color: #212122;
+ }
+ 
+ img{
+     cursor: pointer;
+ }
+ 
+ nav{
+     padding: 10px 2%;
+     justify-content: space-between;
+     box-shadow: 0 0 10px rgba(0,0,0,0.2);
+     background: #fff;
+     position: sticky;
+     top:0;
+     background-color: white;
+     z-index: 10;
+ }
+ 
+ .flex-div{
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+ }
+ 
+ .nav-left{
+     width: 150px;
+     height: 30px;
+    /* border: 1px solid red; */
+    justify-content: space-evenly;
+    display: flex;
+     flex-direction: row;
+ }
+ 
+ 
+ .nav-right{
+    background-color: white;
+    text-align: center;
+    /* border: 1px solid red; */
+ }
+ 
+ .nav-right .nav_ul{
+     display: inline-flex;
+     align-items: center;
+     list-style: none;
+     color: #fff;
+     /* border: 1px solid red; */
+ }
+ 
+ .nav-right .nav_ul .nav_li{
+     width:  100%;
+     /* border: 1px solid rebeccapurple; */
+     padding-left: 30px;
+ }
+ 
+ .sub-class{
+     display: none;
+     /* border: 1px solid red; */
+ }
+ 
+ 
+ .sub-class ul{
+     display: flex;
+     flex-direction: column;
+ }
+ 
+ 
+ .upload_li
+ {
+     /* background-color: black; */
+     position: relative;
+     display: flex;
+     flex-direction: column;
+     align-items: center;   
+ }
+ 
+ 
+ .larger_ul{
+    display: block;
+    position: absolute;
+    background-color:rgb(223, 223, 227);
+    color: black;
+    margin-top: 50px;
+    /* margin-right: 30px; */
+    /* margin-right: 200px; */
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    /* border: 1px solid rgb(10, 9, 9); */
+ }
+ 
+ .larger_ul li{
+     display: flex;
+     width: 150px;
+     list-style-type: none;
+     padding: 5px;
+ }
+ 
+ .larger_ul li img{
+     margin-right: 10px;
+ }
+  
+ .profile_sub_class{
+     display: none;
+ }
+ 
+ .profile_li{
+     display: flex;
+     flex-direction: column;
+     align-items: end;
+ }
+ 
+ .larger_profile{
+         position: absolute;
+         background-color:rgba(240, 240, 243, 0.952);
+         display: flex;  
+         flex-direction: column; 
+         /* border: 2px solid red; */
+         color: black;
+         margin-top: 50px;
+         padding: 5px;
+         border-radius: 10px;
+         justify-content: end;
+         align-items: end;      
+ }
+ 
+ .larger_profile .profile_detail{
+     display: flex;
+     flex-direction: row;
+     align-items: start;
+     justify-content: space-around;
+     color: black;
+     width: 200px;
+     /* border: 2px solid rgb(34, 0, 255); */
+     margin-bottom: 5%;
+ }
+ 
+ 
+ .profile_detail  .profile_name{
+     /* position: relative; */
+     display: flex;
+     flex-direction: column;
+     align-items: start;
+ }
+ 
+ .logOut{
+     display: flex;
+     /* border: 2px solid red; */
+     justify-content:start;
+     align-items: center;
+     width: 100%;
+     padding: 7px;
+     cursor: pointer;
+ }
+ .logOut img{
+     margin-right: 18px;
+ }
+ 
+ 
+ .larger_profile hr{
+     color: black;
+     width: 100%;
+     margin-bottom: 3%;
+ }
+ 
+ .profile_name p{
+    margin-top: 5px;
+    font-weight: bold;
+    cursor: pointer;
+ }
+ 
+ 
+ .profile_name a{
+     text-decoration: none;
+     margin-top: 5%;
+ }
+ 
+ 
+ .profile_icon{
+    margin-top: 15px;
+ }
+ 
+ 
+ #avatar{
+     width: 30px;
+     height: 30px;
+     border-radius: 50%;
+     margin-right: 0px;
+ }
+ 
+ .nav-left .menu_icon{
+     /* border: 2px solid red; */
+    width: 30px;
+    margin-right:10px ;
+ }
+ 
+ /* signIn css */
+ .nav-right img{
+     width: 25px;
+     height: 25px;
+ }
+ 
+ .nav-right button
+ {
+     border-radius: 20px;
+     width: 100px;
+    outline: 0px;
+    border: 1px solid #212122;
+    padding: 3px;
+     background: transparent;
+     cursor: pointer;
+ 
+ }
+ .nav-right button p{
+     padding-left: 5%;
+     font-size: 15px;
+     font-weight: bold;
+ }
+ 
+ .nav-right .signInBtn{
+ display: flex;
+ /* flex-direction: row; */
+  justify-content: center;
+  align-items: center;
+ }
+ 
+ 
+ 
+ 
+ 
+ .nav-middle{
+     width: 300px;
+     height: 40px;
+     display: flex;
+     flex-direction: row;
+ }
+ 
+ .search-box{
+     width: 300px;
+     height: 40px;
+     border: 1px solid #ccc;
+     display: flex;
+     flex-direction: row;
+     justify-content: space-evenly;
+     align-items: center;
+     margin-right: 15px;
+     padding: 8px 12px;
+     border-radius: 25px;
+ }
+ 
+ .nav-middle .search-box input{
+     width: 400px;
+     border: 0px;
+     outline: opx;
+     background: transparent;
+ }
+ 
+ .nav-middle .search-box img{
+     width: 20px;
+     height: 20px;
+     margin-top: 3px;
+ }
+ 
+
+/* -------------sidebar-------------------*/
+.sidebar{
+     background: #fff;
+     width: 20%;
+     height: 100vh;
+     position:absolute;
+     /* border: 1px solid red; */
+     top: 0px;
+     /* padding-left: 2%; */
+     margin-top: 60px;
+ }
+ 
+ .shortcut-link a{
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: space-evenly;
+     padding-left: 5%;
+     padding-top: 2%;
+     
+     margin-bottom: 20px;
+     flex-wrap: wrap;
+     /* border: 1px solid red; */
+    
+ }
+ 
+ 
+ .shortcut-link a img{
+     width: 22px;
+     height: 22px;
+     margin-right: 10px;
+     
+ }
+ 
+ .shortcut-link .short{
+     display: flex;
+     flex-direction: row;
+     justify-content:flex-start;
+ }
+ 
+ .shortcut-link a:first-child{
+     color: #ed3833;
+ }
+ 
+ .sidebar hr{
+     border: 0px;
+     height: 1px;
+     background: #a1a0a0;
+     width: 75%;
+     margin-top: 5%;
+     margin-bottom: 5%;
+ }
+ 
+ .singInInfo{
+     display: flex;
+     width: 75%;
+     /* border: 2px solid red; */
+ }
+ 
+ .singInInfo .info{
+     font-size: 14px;
+     font-weight: bold;
+     margin-bottom: 10px;
+ }
+ 
+ 
+ .singInInfo button
+ {
+     border-radius: 20px;
+     width: 100px;
+     height: 35px;
+    outline: 0px;
+    border: 1px solid #212122;
+    padding: 3px;
+     background: transparent;
+     cursor: pointer;
+ 
+ }
+ .singInInfo button p{
+     padding-left: 5%;
+     font-size: 15px;
+     font-weight: bold;
+ }
+ 
+ .singInInfo .signInBtn{
+ display: flex;
+ /* flex-direction: row; */
+  justify-content: center;
+  align-items: center;
+ }
+ 
+ .subscribed-list h3{
+     font-size: 13px;
+     margin: 20px 0;
+     color: #fc1e1e;
+ }
+ 
+ .subscribed-list a{
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+     margin-bottom: 20px;
+     width: fit-content;
+     flex-wrap: wrap;
+ }
+ 
+ .subscribed-list a img{
+     width: 25px;
+     border-radius: 50%;
+     margin-right: 20px;
+ 
+ }
+ 
+ .small-sidebar{
+     width: 5%;
+ }
+ 
+ .small-sidebar a p{
+   display: none;
+ 
+ }
+ 
+ .small-sidebar h3{
+     display: none;
+ }
+ 
+ .small-sidebar hr{
+     width: 50%;
+     margin-bottom: 25px;
+     display: none;
+ }
+ 
+ .small-sidebar .subscribed-list{
+     display: none;
+ }
+
+
+/* main */
+
+
+ 
+ 

@@ -8,7 +8,7 @@ import {verifyJWT} from "../middlewares/aut.middlewares.js";
 
 const router = Router()
 
-router.route("/getAllVideos").get(getAllVideos);
+router.route("/getAllVideos").get(verifyJWT,getAllVideos);
 router.route("/uploadVideo").post(
     upload.fields([
         { 
@@ -21,12 +21,12 @@ router.route("/uploadVideo").post(
         },
     ]),verifyJWT,
     publishAVideo);
-router.route("/c/:videoId").get(getVideoById)
+router.route("/c/:videoId").get(verifyJWT,getVideoById)
                         .patch(verifyJWT,upload.single("thumbnail"),updateVideo)
                         .delete(verifyJWT,deleteVideo);
 router.route("/getbytitle/c/:title").get(verifyJWT,getVideoByTitle);
 router.route("/toggle/c/:videoId").patch(verifyJWT,togglePublishStatus);
-router.route("/IncView/:videoId").get(IncreaseView);
+router.route("/IncView/:videoId").get(verifyJWT,IncreaseView);
 
 
 

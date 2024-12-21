@@ -200,19 +200,19 @@ const deleteuser = asynchandler(async(req,res)=>{
 const refreshAccessToken = asynchandler(async (req,res)=>{
   console.log("in controller refresh token");
   const incomingrefreshtoken = req.cookies.refreshToken||req.body.refreshToken
-     console.log(incomingrefreshtoken);
+    //  console.log(incomingrefreshtoken);
   if(!incomingrefreshtoken){
     throw new apierror(401,"unauthorized request");
   }
-  console.log("reach");
+  // console.log("reach");
 try {
-        console.log(incomingrefreshtoken);
+        // console.log(incomingrefreshtoken);
     const decodedtoken = jwt.verify(
       incomingrefreshtoken,
       process.env.REFRESH_TOKEN_SECRET
     )
-    console.log("reach");
-    console.log("decoded token",decodedtoken);
+    // console.log("reach");
+    // console.log("decoded token",decodedtoken);
   
     const user =await User.findById(decodedtoken?._id)
     if(!user){
@@ -388,7 +388,7 @@ const getUserChannelProfile = asynchandler(async(req, res) => {
       },
       {
           $lookup: {
-              from: "Subscriptions",
+              from: "subscriptions",
               localField: "_id",
               foreignField: "channel",
               as: "noOfSubscribers"
@@ -396,7 +396,7 @@ const getUserChannelProfile = asynchandler(async(req, res) => {
       },
       {
           $lookup: {
-              from: "Subscriptions",
+              from: "subscriptions",
               localField: "_id",
               foreignField: "subscriber",
               as: "meSubscripedToHowMany"
@@ -429,7 +429,6 @@ const getUserChannelProfile = asynchandler(async(req, res) => {
               avatar: 1,
               coverImage: 1,
               email: 1
-
           }
       }
   ])
@@ -441,14 +440,15 @@ const getUserChannelProfile = asynchandler(async(req, res) => {
   return res
   .status(200)
   .json(
-      new apierror(200, channel[0], "User channel fetched successfully")
+      new apiresponse(200, channel[0], "User channel fetched successfully")
   )
 })
 
 
+
 // ******************************get watch History****************************
 const getwatchHistory = asynchandler(async(req,res)=>{
-    const user = await User.aggregate([
+    const his = await User.aggregate([
     {
         $match:{
           _id: new mongoose.Types.ObjectId(req.user?._id)
@@ -456,16 +456,16 @@ const getwatchHistory = asynchandler(async(req,res)=>{
     },
       {
         $lookup:{
-          from:"video",
+          from:"videos",
           localField:"watchHistory",
           foreignField:"_id",
-          as:"watchHistory",
+          as:"history",
           pipeline:[
             {
               $lookup:{
                 from:"users",
                 localField:"owner",
-                foreignField:"-id",
+                foreignField:"_id",
                 as:"owner",
                 pipeline:[
                   {
@@ -490,13 +490,13 @@ const getwatchHistory = asynchandler(async(req,res)=>{
       }
     ])
 
-
+    console.log(his);
     return res
     .status(200)
     .json(
       new apiresponse(
         200,
-        user[0].watchHistory,
+        his[0].watchHistory,
       "watch History fetched successfully"
       )
     )

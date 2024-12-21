@@ -140,6 +140,21 @@ const getVideoById = asynchandler(async (req, res) => {
         }
     )
 
+    const user = await User.findByIdAndUpdate(
+        req.user?._id,
+        {
+            $addToSet:{watchHistory:videoId}
+        },
+        {
+            new:true
+        }
+    );
+
+    if(!user)
+    {
+        throw new apierror("user not find");
+    }
+
     return res.status(200)
     .json(
         new apiresponse(200,video,"video is found by id ")
@@ -226,6 +241,7 @@ const updateVideo = asynchandler(async (req, res) => {
 
 //deleteVideo video
 const deleteVideo = asynchandler(async (req, res) => {
+    
     const { videoId } = req.params
     if(!videoId?.trim())
     {
@@ -235,6 +251,15 @@ const deleteVideo = asynchandler(async (req, res) => {
     if(!video)
     {
         throw new apierror(400,"video is not found");
+    }
+
+    const Video_owner = video.owner.toString();
+    const  user_id = req.user._id.toString();
+
+    if(Video_owner!=user_id)
+    {
+        throw new apierror(200,"you are not owner , you can't delete video")
+        
     }
    await Video.deleteOne({_id:videoId});
    return res.status(200).json(
@@ -270,7 +295,7 @@ const togglePublishStatus = asynchandler(async (req, res) => {
     return res.status(200)
     .json(new apiresponse(200,toggle,"video status is updated"))
 })
-//TODO: toggle publish status
+//TODO: increaseView
 
 const IncreaseView = asynchandler(async(req,res)=>{
     const {videoId} = req.params

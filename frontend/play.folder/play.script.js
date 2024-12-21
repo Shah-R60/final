@@ -6,7 +6,10 @@ async function playVideo() {
     if(link)
         {
             try{
-                const id = await fetch(`http://localhost:3000/api/v1/video/IncView/${videoId}`)
+                const id = await fetch(`http://localhost:3000/api/v1/video/IncView/${videoId}`,{
+                    method: 'GET',
+                    credentials:"include"
+                })
                 console.log(id);
                 console.log(link);
                 videoLink.src = link

@@ -16,6 +16,7 @@ const nav_ul = document.querySelector(".nav_ul");
 const signInIcon = document.getElementById("signInIcon")
 const shorts = document.querySelectorAll('.short');
 const sign = document.querySelectorAll('.sign');
+
 //signInbtn
 const signInBtn = document.querySelector(".signInBtn")
 const sidebar_signInBtn = document.querySelector(".sidebar_signInBtn")
@@ -23,18 +24,27 @@ const subscribe_list = document.querySelector(".subscribed-list")
 const singInInfo = document.querySelector(".singInInfo");
 const hr = document.querySelector(".hr");
 
+//current user profile
+let avatar_l = document.querySelectorAll("#avatar");
+let full_name = document.querySelector(".fullName");
+let user_name = document.querySelector(".userName");
+let user_fullName = "";
+let user_userName = "";
+let avatar_link ="";
+
 //check for signin or not
 const urlParams = new URLSearchParams(window.location.search);
 const flag  = urlParams.get('flag');
-console.log(flag);
-
 
 if(flag=="signin")
 {
         console.log("inside");
     async function show_video(){
       try{
-          const response = await fetch('http://localhost:3000/api/v1/video/getAllVideos');
+          const response = await fetch('http://localhost:3000/api/v1/video/getAllVideos',{
+              method:'GET',
+              credentials:"include"
+          });
           // console.log(response);
           const responseObject = await response.json();
           // console.log(responseObject);
@@ -94,7 +104,20 @@ if(flag=="signin")
         });
         const user = await user_data.json();
         //  console.log(user.data)
-        console.log(user.data.fullname)
+        console.log(user.data)
+        user_fullName = user.data.fullname
+        user_userName = user.data.username
+        avatar_link = user.data.avatar
+
+                
+        console.log(avatar_link)
+        console.log(user_fullName)
+        full_name.textContent = user_fullName
+        user_name.textContent = user_userName
+         
+        avatar_l.forEach(avat=>{
+          avat.src = avatar_link
+        })
       }
       catch{
 
@@ -173,6 +196,39 @@ const profile_sub_class = document.querySelector('.profile_sub_class');
 profile_li.onclick = function(){
   profile_sub_class.classList.toggle("larger_profile")
 }
+
+//logout 
+const logout = document.querySelector(".logOut");
+
+logout.addEventListener("click",()=>{
+
+   async function logOut_fun() {
+
+    try{
+      const logOut_response = await fetch("http://localhost:3000/api/v1/user/logout",{
+        method:"POST",
+        credentials:"include"
+      })
+
+      // console.log(logOut_response)
+      if(!logOut_response){
+        throw new error('Failed to Logout')
+      }
+       
+      const playlink = `/view/index.html?flag=singOut`;
+      window.location.href = playlink;
+    }
+    catch(error){
+       console.log('Logout again');
+    }
+   }
+   logOut_fun();
+})
+
+
+
+//refreshtoken and accesstoken
+
 
 
 

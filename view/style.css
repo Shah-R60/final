@@ -154,7 +154,19 @@ nav{
     display: flex;
     flex-direction: column;
     align-items: start;
-    margin-left: 10px;
+}
+
+.logOut{
+    display: flex;
+    /* border: 2px solid red; */
+    justify-content:start;
+    align-items: center;
+    width: 100%;
+    padding: 7px;
+    cursor: pointer;
+}
+.logOut img{
+    margin-right: 18px;
 }
 
 
@@ -166,6 +178,14 @@ nav{
 
 .profile_name p{
    margin-top: 5px;
+   font-weight: bold;
+   cursor: pointer;
+}
+
+
+.profile_name a{
+    text-decoration: none;
+    margin-top: 5%;
 }
 
 
@@ -173,8 +193,10 @@ nav{
    margin-top: 15px;
 }
 
+
 #avatar{
     width: 30px;
+    height: 30px;
     border-radius: 50%;
     margin-right: 0px;
 }
@@ -184,7 +206,6 @@ nav{
    width: 30px;
    margin-right:10px ;
 }
-
 
 /* signIn css */
 .nav-right img{
@@ -260,7 +281,7 @@ display: flex;
     background: #fff;
     width: 20%;
     height: 100vh;
-    position: fixed;
+    position:absolute;
     /* border: 1px solid red; */
     top: 0px;
     /* padding-left: 2%; */
