@@ -490,13 +490,13 @@ const getwatchHistory = asynchandler(async(req,res)=>{
       }
     ])
 
-    console.log(his);
+    // console.log(his);
     return res
     .status(200)
     .json(
       new apiresponse(
         200,
-        his[0].watchHistory,
+        his[0],
       "watch History fetched successfully"
       )
     )

@@ -31,7 +31,6 @@ const getAllVideos = asynchandler(async (req, res) => {
         {
             $match:store
         },
-
             {
               $lookup:{
                  from:"users",
@@ -42,7 +41,8 @@ const getAllVideos = asynchandler(async (req, res) => {
             },
             {
                 $addFields:{
-                    avatar: "$userInfo.avatar"
+                    avatar: "$userInfo.avatar",
+                    channel_name:"$userInfo.fullname"
                 }
             },
             {
@@ -130,30 +130,7 @@ const getVideoById = asynchandler(async (req, res) => {
         throw new apierror(404,"video is not found")
     }
 
-    //increasing value of view for every call
-    await Video.updateOne(
-        {
-            _id:video._id
-        },
-        {
-           $inc:{views:1}
-        }
-    )
 
-    const user = await User.findByIdAndUpdate(
-        req.user?._id,
-        {
-            $addToSet:{watchHistory:videoId}
-        },
-        {
-            new:true
-        }
-    );
-
-    if(!user)
-    {
-        throw new apierror("user not find");
-    }
 
     return res.status(200)
     .json(
@@ -304,6 +281,34 @@ const IncreaseView = asynchandler(async(req,res)=>{
         throw new apierror(400,"videoId is necessary")
     }
 
+    const video = await Video.aggregate([
+        {
+            $match:{
+                _id:new mongoose.Types.ObjectId(videoId)
+            }
+           
+        },
+        {
+            $lookup:{
+                from:"users",
+                localField:"owner",
+                foreignField:"_id",
+                as:"owner",
+                pipeline:[
+                    {
+                      $project:{
+                        fullname:1,
+                        username:1,
+                        avatar:1
+                      }
+                    }
+                  ]
+            }
+        }
+    ])
+    //
+    
+    //
    const increaseV =  await Video.updateMany(
         {
             _id:videoId
@@ -317,8 +322,24 @@ const IncreaseView = asynchandler(async(req,res)=>{
         throw new apierror(400,"there is some problem at server side")
     }
 
+
+    const user = await User.findByIdAndUpdate(
+        req.user?._id,
+        {
+            $addToSet:{watchHistory:videoId}
+        },
+        {
+            new:true
+        }
+    );
+
+    if(!user)
+    {
+        throw new apierror("user not find");
+    }
+
     res.status(200).json(
-        new apiresponse(200,"okk")
+        new apiresponse(200,video[0], "okk")
     )
 })
 

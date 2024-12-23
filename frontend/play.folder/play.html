@@ -1,68 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>play Video -Easy Tutorials Youtube channel</title>
-    <link rel="stylesheet" href="play.style.css">
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="play.style.css">
+     <title>Profile_page</title>
 </head>
 <body>
-    <nav class="flex-div">
-        <div class="nav-left">
-            <img src="/frontend/image.folder/menu.jpg" class="menu_icon">
-            <img src="/frontend/image.folder/logo_light.png" class="logo_icon">
-        </div>
+     <body >
+          <nav class="flex-div">
+              <div class="nav-left">
+                  <img src="/frontend/image.folder/menu.jpg" class="menu_icon">
+                  <img src="/frontend/image.folder/logo_light.png" class="logo_icon">
+              </div>
+      
+              <div class="nav-middle">
+                  <div class="search-box">
+                      <input type="text" placeholder="Search">
+                      <img src="/frontend/image.folder/search.png" class="search_icon">
+                  </div>
+                  <img src="/frontend/image.folder/mike.png" class="mike_icon">
+              </div>
+              <div class="nav-right ">
+                  <ul class="nav_ul">
+                      <li class="nav_li  upload_li">
+                          <img src="/frontend/image.folder/upload.png" class="upload">
+                          <div class="sub-class">
+                              <ul class="upload_ul">
+                                  <li><img src="/frontend/image.folder/upload_video.png" alt=""><a href="">Upload Video</a></li>
+                                  <li><img src="/frontend/image.folder/upload_post.png" alt=""><a href="">Upload Post</a></li>
+                              </ul>
+                          </div>
+                      </li>
+                      <li class="nav_li"><img src="/frontend/image.folder/notification.png" class="img2"></li>
+                      <li class="nav_li profile_li">
+                          <img src="/frontend/image.folder/avatar.jpg" id="avatar">
+                          <div class="profile_sub_class  ">
+                              <div class="profile_detail">
+                                 
+                                      <div class="profile_icon">
+                                          <img src="/frontend/image.folder/avatar.jpg" id="avatar" class="av">
+                                      </div>
+                                      <div class="profile_name">
+                                          <p class="fullName"> shahll rahul</p>
+                                          <p class="userName">shah-R60</p>
+                                          <a href="">View your channel</a>
+                                      </div>
+                              </div>
+                              <hr>
+                              <div class="logOut" style="color: black;">
+                                 <img src="/frontend/image.folder/logout.png" alt="logOut">
+                                 <h4>Sign Out</h4>
+                              </div> 
+                          </div>
+                      </li>
+                      <li class="nav_li" id="signInIcon" style="display: none;" ><button class="signInBtn"><img src="../frontend/image.folder/signin.png" id="avatar"><p>sign in</p></button></li>
+                  </ul> 
+              </div>
+          </nav>
+<!-- ---------------------------navbar---------------------------       -->
 
-        <div class="nav-middle">
-            <div class="search-box">
-                <input type="text" placeholder="Search">
-                <img src="/frontend/image.folder/search.png" class="search_icon">
-            </div>
-            <img src="/frontend/image.folder/mike.png" class="mike_icon">
-        </div>
-        <div class="nav-right ">
-            <img src="/frontend/image.folder/upload.png" class="img2">
-            <img src="/frontend/image.folder/more.png" class="img2">
-            <img src="/frontend/image.folder/notification.png" class="img2">
-            <img src="/frontend/image.folder/avatar.jpg" id="avatar">
-        </div>
-    </nav>
-
-<!-- ---------------------------banner--------------------------- -->
+<!-- ---------------------------video--------------------------- -->
     <div class="container play-container">
         <div class="row">
             <div class="play-video">
                 <video controls autoplay  class="videoControll">
-                    <source src="http://res.cloudinary.com/dkfsnygg3/video/upload/v1729358369/vteyg6aiwchrwaeamcki.mp4" type="video/mp4"  class="vid">
+                    <source src="" type="video/mp4"  class="vid">
                 </video>
-                <div class="tags">
-                    <a href="">#conding</a> 
-                    <a href="">#HTML</a> 
-                    <a href="">#CSS</a> 
-                    <a href="">#javascript</a> 
-                </div>
-                <h3>
-                    Best Youtube channel to learn Web development
-                </h3>
-                <div class="play-video-info">
-                    <p>1225 View &bull; 2 days ago</p>
-                    <div>
-                        <a href=""><img src="/frontend/image.folder/like.png">125</a>
-                        <a href=""><img src="/frontend/image.folder/dislike.png">125</a>
-                        <a href=""><img src="/frontend/image.folder/share.png">125</a>
-                        <a href=""><img src="/frontend/image.folder/save.png">125</a>
+                <div class="video_detail">
+                    <h3 class="video_title_element">
+                        Best Youtube channel to learn Web development
+                    </h3>
+                    <div class="channel_video_info">
+                        <div class="channel_detail">
+                            <img src="/frontend/image.folder/avatar.jpg" alt="avatar" class="channel_avatar">
+                            <div class="name_subscriber">
+                                <p class="name">Easy Tutorials</p>
+                                <p class="subscriber">589k subscriber</p>
+                            </div>
+                            <button class="subscriber_button">
+                                <img src="/frontend/image.folder/bell.png" alt="" class="subscriber_bell">
+                               <p class="subs">Subscribe</p>
+                            </button>
+                        </div>
+                        <div class="video_info">
+                            <div class="info_button">
+                                <a href="" class="like_button">
+                                    <img src="/frontend/image.folder/like.png">
+                                    <p class="like">125</p>
+                                </a>
+                                <img src="/frontend/image.folder/dislike.png">
+                            </div>
+                            <div class="share">
+                                <img src="/frontend/image.folder/share.png">
+                                <p>share</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <hr>
-                 <div class="publisher">
-                    <img src="/frontend/image.folder/avatar.jpg" alt="">
-                    <div>
-                        <p>Shah Rahul</p>
-                        <span>500k Subscripber</span>
-                    </div>
-                    <button type="button">Subscribe</button>
-                 </div>
-
+                <hr>      
                  <div class="vid-description">
                     <p>channel that make learning easy</p>
                     <p>Subscripe Easy Tutorials to watch more tutorial on wev development</p>
@@ -150,64 +186,17 @@
                      </div>
                  </div>
             </div>
-            <div class="right-sidebar">
-                 
-                <div class="side-video-list">
+
+            <!-- -------------------------sideVideos--------------------------- -->
+            <div class="right-sidebar">         
+                <!-- <div class="side-video-list">
                     <a href="" class="small-thumbnail"><img src="/frontend/image.folder//thumbnail.jpg" ></a>
                      <div class="vid-info">
-                        <a href="">Best channel that help you to learn webdev</a>
+                        <a href="" class="">Best channel that help you to learn webdev</a>
                         <p>Easy tutorial</p>
                         <p>15k Views</p> 
                      </div>
-                </div>
-                <div class="side-video-list">
-                    <a href="" class="small-thumbnail"><img src="/frontend/image.folder//thumbnail.jpg" ></a>
-                     <div class="vid-info">
-                        <a href="">Best channel that help you to learn webdev</a>
-                        <p>Easy tutorial</p>
-                        <p>15k Views</p> 
-                     </div>
-                </div>
-                <div class="side-video-list">
-                    <a href="" class="small-thumbnail"><img src="/frontend/image.folder//thumbnail.jpg" ></a>
-                     <div class="vid-info">
-                        <a href="">Best channel that help you to learn webdev</a>
-                        <p>Easy tutorial</p>
-                        <p>15k Views</p> 
-                     </div>
-                </div>
-                <div class="side-video-list">
-                    <a href="" class="small-thumbnail"><img src="/frontend/image.folder//thumbnail.jpg" ></a>
-                     <div class="vid-info">
-                        <a href="">Best channel that help you to learn webdev</a>
-                        <p>Easy tutorial</p>
-                        <p>15k Views</p> 
-                     </div>
-                </div>
-                <div class="side-video-list">
-                    <a href="" class="small-thumbnail"><img src="/frontend/image.folder//thumbnail.jpg" ></a>
-                     <div class="vid-info">
-                        <a href="">Best channel that help you to learn webdev</a>
-                        <p>Easy tutorial</p>
-                        <p>15k Views</p> 
-                     </div>
-                </div>
-                <div class="side-video-list">
-                    <a href="" class="small-thumbnail"><img src="/frontend/image.folder//thumbnail.jpg" ></a>
-                     <div class="vid-info">
-                        <a href="">Best channel that help you to learn webdev</a>
-                        <p>Easy tutorial</p>
-                        <p>15k Views</p> 
-                     </div>
-                </div>
-                <div class="side-video-list">
-                    <a href="" class="small-thumbnail"><img src="/frontend/image.folder//thumbnail.jpg" ></a>
-                     <div class="vid-info">
-                        <a href="">Best channel that help you to learn webdev</a>
-                        <p>Easy tutorial</p>
-                        <p>15k Views</p> 
-                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

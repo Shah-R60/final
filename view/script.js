@@ -41,13 +41,13 @@ if(flag=="signin")
         console.log("inside");
     async function show_video(){
       try{
-          const response = await fetch('http://localhost:3000/api/v1/video/getAllVideos',{
+          const response = await fetch('http://localhost:3000/api/v1/video/getAllVideos?limit=100',{
               method:'GET',
               credentials:"include"
           });
           // console.log(response);
           const responseObject = await response.json();
-          // console.log(responseObject);
+          console.log(responseObject);
           const video_list = responseObject.data;
           // console.log(video_list);
 
@@ -67,7 +67,7 @@ if(flag=="signin")
               const created_time_string = element.createdAt;
               const current_time = new Date();
               const created_time = new Date(created_time_string);
-
+              const channel_name = element.channel_name;
               let time_passed =((current_time.getDate()-created_time.getDate())+30)%30;        
               let vari = "days ago";
               if(time_passed===0){
@@ -87,6 +87,7 @@ if(flag=="signin")
                       <img src="${avatar}">
                       <div class="video-info">
                         <a href="">${videoTitle}</a>
+                        <p class="channel_name">${channel_name}</p>
                         <p>${videoView} Views • ${time_passed} ${vari}</p>
                       </div>
                     </div>
@@ -227,7 +228,6 @@ logout.addEventListener("click",()=>{
 
 
 
-//refreshtoken and accesstoken
 
 
 

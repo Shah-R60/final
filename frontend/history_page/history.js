@@ -7,7 +7,7 @@ menuIcon.onclick = function(){
     container.classList.toggle("large-container")
 }
 
-console.log("hiiiiiiiiiiiiiiiiii")
+console.log("1")
 //upload
 
 const upload = document.querySelector('.upload');
@@ -18,6 +18,8 @@ upload.onclick = function(){
 }
 
 //profile
+console.log("2")
+
 
 const profile_li = document.querySelector('.profile_li');
 const profile_sub_class = document.querySelector('.profile_sub_class');
@@ -28,6 +30,7 @@ profile_li.onclick = function(){
 
 //logout 
 const logout = document.querySelector(".logOut");
+console.log("3")
 
 logout.addEventListener("click",()=>{
 
@@ -54,6 +57,7 @@ logout.addEventListener("click",()=>{
    logOut_fun();
 })
 
+console.log("4")
 
 
 //current user profile
@@ -64,6 +68,7 @@ let user_name = document.querySelector(".userName");
 
 
 //logic for profile
+console.log("5")
 
 async function profile_updatae() {
      try{
@@ -91,4 +96,65 @@ async function profile_updatae() {
 profile_updatae();
 
 
-//
+//main history
+console.log("6");
+const main = document.querySelector(".main");
+async function  history_fun() {
+    try{
+         const history_response =  await fetch("http://localhost:3000/api/v1/user/history",{
+          method: 'GET',
+          credentials:"include"
+         })
+
+        if(!history_response){
+          throw new error("history is not fetch")
+         }
+        const json_response = await history_response.json();
+        const history_array = json_response.data.history;
+        // console.log(history_array);
+        let videoHTML = '';
+        
+        for (let index = 0; index < history_array.length; index++) {
+          
+          console.log(history_array[index])
+              const thumbnailLink = history_array[index].thumbnail
+              const videoLink = history_array[index].videoFile
+              const videoTitle = history_array[index].title
+              const videoDescription = history_array[index].description
+              const videoView = history_array[index].views
+              const owner_full_name = history_array[index].owner.fullname
+
+               const playlink = `/frontend/play.folder/play.html?link=${videoLink}&id=${history_array[index]._id}`
+               videoHTML += `
+                <div class="vid">
+                <a href=${playlink}><img src="${thumbnailLink}" alt="" class="thumbnail"> </a>
+                    <div class="vid_detail">
+                            <div class="video_title">
+                               ${videoTitle}
+                            </div>
+                        <div class="channel_detail">
+                                <div class="channel_name">
+                                  ${owner_full_name}
+                                </div>
+                                <div class="view">
+                                  ${videoView} Views
+                                </div>
+                        </div>
+                            <div class="discription">
+                               ${videoDescription}
+                            </div>
+                    </div>
+            </div>
+            `
+        }
+
+        main.innerHTML = videoHTML
+    }
+    catch(error)
+    {
+       console.log("history error",error)
+    }
+}
+
+history_fun()
+

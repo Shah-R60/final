@@ -7,8 +7,6 @@ menuIcon.onclick = function(){
     container.classList.toggle("large-container")
 }
 
-console.log("hiiiiiiiiiiiiiiiiii")
-//upload
 
 const upload = document.querySelector('.upload');
 const sub_class = document.querySelector('.sub-class');
