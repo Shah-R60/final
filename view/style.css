@@ -245,15 +245,13 @@ display: flex;
     width: 300px;
     height: 40px;
     display: flex;
-    flex-direction: row;
 }
 
 .search-box{
-    width: 400px;
+    /* width: 400px; */
     height: 40px;
     border: 1px solid #ccc;
     display: flex;
-    flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
     margin-right: 15px;

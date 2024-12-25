@@ -1,3 +1,36 @@
+//search logic
+
+const search_input = document.querySelector(".search_input");
+
+
+  search_input.addEventListener("keydown",(event)=>{
+            
+       if(event.key=="Enter")
+       {
+        console.log("Enter key was pressed!")
+        search_fun(search_input.value)
+       }
+       
+  })
+
+
+  async function search_fun(value) {
+    try{
+          
+          const search_link = `/frontend/search_page/search.html?data=${value}`;
+          window.location.href = search_link;
+
+    }
+    catch(error)
+    {
+       console.log("error in search",error);
+    }
+  }
+
+    // search_fun()
+
+
+
 //for upload
 const upload = document.querySelector('.upload');
 const sub_class = document.querySelector('.sub-class');
@@ -82,9 +115,11 @@ profile_updatae();
 
 // -----------------main-------------------------------
 const urlParams = new URLSearchParams(window.location.search);
-const videoLink = document.querySelector('video');
 const link = urlParams.get('link');
 const videoId = urlParams.get('id');
+
+const videoLink_element = document.querySelector('video');
+
 
 const video_title_element = document.querySelector(".video_title_element");
 const channel_avatar = document.querySelector(".channel_avatar");
@@ -140,7 +175,7 @@ async function playVideo() {
                     subscriber_bell.style.display = "flex";
                 }
 
-                videoLink.src = link
+                videoLink_element.src = link
             }
             catch(error){
                 console.log("there is something error ..",error)
@@ -252,6 +287,8 @@ async function show_video(){
   }
 
   show_video()
+
+
 
 
 

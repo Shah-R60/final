@@ -1,3 +1,35 @@
+//search logic
+
+const search_input = document.querySelector(".search_input");
+
+
+  search_input.addEventListener("keydown",(event)=>{
+            
+       if(event.key=="Enter")
+       {
+        console.log("Enter key was pressed!")
+        search_fun(search_input.value)
+       }
+       
+  })
+
+
+  async function search_fun(value) {
+    try{
+          
+          const search_link = `/frontend/search_page/search.html?data=${value}`;
+          window.location.href = search_link;
+
+    }
+    catch(error)
+    {
+       console.log("error in search",error);
+    }
+  }
+
+    // search_fun()
+
+
 // ----------------sidebar toggle-----
 var menuIcon = document.querySelector(".menu_icon");
 var sidebar = document.querySelector(".sidebar");
@@ -157,4 +189,8 @@ async function  history_fun() {
 }
 
 history_fun()
+
+
+
+
 

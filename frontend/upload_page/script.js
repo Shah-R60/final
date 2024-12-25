@@ -20,8 +20,9 @@ fileInput.addEventListener("change",async ({target})=>{
          const response = await fetch(`http://localhost:3000/api/v1/video/uploadVideo`,{
             method:"POST",
             body:formData
+            // credentials:"include"
          });
-
+         console.log(response)
          if(response)
          {
             alert("video uploaded successfully!");

@@ -1,3 +1,41 @@
+//search logic
+
+const search_input = document.querySelector(".search_input");
+
+
+  search_input.addEventListener("keydown",(event)=>{
+            
+       if(event.key=="Enter")
+       {
+        console.log("Enter key was pressed!")
+        search_fun(search_input.value)
+       }
+       
+  })
+
+
+  async function search_fun(value) {
+    try{
+          
+          const search_link = `../frontend/search_page/search.html?data=${value}`;
+          window.location.href = search_link;
+
+    }
+    catch(error)
+    {
+       console.log("error in search",error);
+    }
+  }
+
+    // search_fun()
+
+
+
+
+
+
+
+
 // ----------------sidebar toggle-----
 var menuIcon = document.querySelector(".menu_icon");
 var sidebar = document.querySelector(".sidebar");
@@ -47,7 +85,7 @@ if(flag=="signin")
           });
           // console.log(response);
           const responseObject = await response.json();
-          console.log(responseObject);
+          // console.log(responseObject);
           const video_list = responseObject.data;
           // console.log(video_list);
 
@@ -98,21 +136,21 @@ if(flag=="signin")
           list_container.innerHTML = videoHTML;
           
           //  get current user data
-          console.log("hahahaha")
+          // console.log("hahahaha")
           const user_data = await fetch('http://localhost:3000/api/v1/user/current-user', {
             method: 'GET',
             credentials: 'include' // Ensures cookies are sent
         });
         const user = await user_data.json();
         //  console.log(user.data)
-        console.log(user.data)
+        // console.log(user.data)
         user_fullName = user.data.fullname
         user_userName = user.data.username
         avatar_link = user.data.avatar
 
                 
-        console.log(avatar_link)
-        console.log(user_fullName)
+        // console.log(avatar_link)
+        // console.log(user_fullName)
         full_name.textContent = user_fullName
         user_name.textContent = user_userName
          

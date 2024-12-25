@@ -58,26 +58,18 @@ cover_but.addEventListener("click",()=>{
 
      input_avatar.addEventListener("change",(event)=>{
            avatar_res = event.target.files[0];
-          console.log(avatar_res);
      })
 
 
      input_coverImage.addEventListener("change",(event)=>{
            cover_res = event.target.files[0];
-          console.log(cover_res);
      })
 
      async function show(event) {
           event.preventDefault();
           if(flag=="signup")
           {
-               console.log(input_username);
-               console.log(input_password);
-               console.log(input_fullname);
-               console.log(input_email);
-               console.log(avatar_res);
-               console.log(cover_res);
-
+              
                if(input_username&&input_fullname&&input_email&&input_password&&avatar_res&&cover_res)
                {
                     const formData = new FormData()

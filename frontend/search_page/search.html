@@ -3,8 +3,8 @@
 <head>
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="util.css">
-     <title>Profile_page</title>
+     <link rel="stylesheet" href="search.css">
+     <title>Search_page</title>
 </head>
 <body>
      <body >
@@ -13,18 +13,18 @@
                   <img src="/frontend/image.folder/menu.jpg" class="menu_icon">
                   <img src="/frontend/image.folder/logo_light.png" class="logo_icon">
               </div>
+      
+               <!-- -----nav-middle--- -->
+        
+        <div class="nav-middle">
+          <div class="search-box">
+                  <input type="text" placeholder="Search" class="search_input" >
+              <img src="/frontend/image.folder/search.png" class="search_icon">
+          </div>
+          <img src="/frontend/image.folder/mike.png" class="mike_icon">
+      </div>
 
- <!-- -------------------nav-mid------------- -->
-
-              <div class="nav-middle">
-                <div class="search-box">
-                        <input type="text" placeholder="Search" class="search_input" >
-                    <img src="/frontend/image.folder/search.png" class="search_icon">
-                </div>
-                <img src="/frontend/image.folder/mike.png" class="mike_icon">
-            </div>
-
-  <!-- -----nav-right--- -->
+     <!-- -----------navright-------------- -->
               <div class="nav-right ">
                   <ul class="nav_ul">
                       <li class="nav_li  upload_li">
@@ -72,18 +72,18 @@
 
  <div class="sidebar">
      <div class="shortcut-link">
-         <a href="" class="short sign"><img src="/frontend/image.folder/home.png" alt=""><p>Home</p> </a>
+         <a href="/view/index.html?flag=signin" class="short sign"><img src="/frontend/image.folder/home.png" alt=""><p>Home</p> </a>
          <a href=""  class="short sign"><img src="/frontend/image.folder/explore.png" alt=""><p>Explore</p></a>
          <a href="" class="short sign"><img src="/frontend/image.folder/subscription.png" alt=""><p>Subcriptions</p></a>
        <hr>
          <a href="" class="short sign"><h4>You ></h3></a>
-         <a href="" class="short sign "><img src="/frontend/image.folder/history.png" alt=""><p>History</p></a>
+         <a href="/frontend/history_page/history.html" class="short sign "><img src="/frontend/image.folder/history.png" alt=""><p>History</p></a>
          <a href="" class="short" ><img src="/frontend/image.folder/watch_letter.png" alt=""><p>watch Later</p></a>
          <a href="" class="short"><img src="/frontend/image.folder/playlist.png" alt=""><p>playlist</p></a>
          <a href="" class="short"><img src="/frontend/image.folder/liked_video.png" alt=""><p>Liked video</p></a>
        <hr class="hr">
-         <a href="" class="short singInInfo sign"><p class="info">Sign in to like videos, comment, and subscribe.</p> <button class="signInBtn sidebar_signInBtn"><img src="../frontend/image.folder/signin.png" id="avatar"><p>sign in</p></button> </a>
-       <hr>
+         <!-- <a href="" class="short singInInfo sign"><p class="info">Sign in to like videos, comment, and subscribe.</p> <button class="signInBtn sidebar_signInBtn"><img src="../frontend/image.folder/signin.png" id="avatar"><p>sign in</p></button> </a> -->
+       <!-- <hr> -->
      </div>
      
      <div class="subscribed-list">
@@ -98,10 +98,40 @@
 
 
 <!-- ---------------------------main--------------------------- -->
+<!-- <hr> -->
 
+<div class="main">
+    <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur quod culpa magnam enim cumque maxime similique omnis. Saepe hic, iusto mollitia libero vitae neque quasi quas nemo corporis quae facere perferendis veniam impedit laborum vel dolorem. Rem, totam laboriosam, consectetur temporibus corrupti odio quasi dolore tenetur et odit aperiam facilis. -->
+    <!-- <div class="video_sub_main">
+        <div class="video_thumbnail">
+            <img src="/frontend/image.folder/ssuperman.jpg" alt="" class="img_thumbnail">
+        </div>
+        <div class="video_detail">
+            <p class="video_title">Lorem ipsum dolor sit amet.</p>
+            <div class="view_duration">
+                <p class="views">234k views</p>
+                <p class="duration">4 day ago</p>
+            </div>
+            <div class="channel_detail">
+                <img src="/frontend/image.folder/avatar.jpg" alt="" class="channel_avatar">
+                <p class="channel_name">shah rahul</p>
+            </div>
+            <div class="video_description">
+                Lorem ipsum dolor sit amet, consectetur adipisicing.
+            </div>
+        </div>
+     </div> -->
+
+     <!-- ---------no result found------- -->
+     <!-- <div class="no_result">
+        <img src="/frontend/image.folder/no_result.jpg" alt="">
+        <p class="found">no result found</p>
+        <p>Try different keywords</p>
+     </div> -->
+</div>
 
 
 
 </body>
-<script src="util.js"></script>
+<script src="search.js"></script>
 </html>
