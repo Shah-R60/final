@@ -79,7 +79,7 @@ cover_but.addEventListener("click",()=>{
                     formData.append("fullname",input_fullname.value);
                     formData.append("coverImage",avatar_res);
                     formData.append("avatar",cover_res);
-                    console.log("hi");
+                    // console.log("hi");
                     try{
                          const response = await fetch('http://localhost:3000/api/v1/user/register',{
                                    method:"POST",
