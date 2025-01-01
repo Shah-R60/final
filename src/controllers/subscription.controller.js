@@ -34,19 +34,46 @@ const toggleSubscription = asynchandler(async (req, res) => {
     )
 })
 
-
+// controller to return subscriber list of a channel
 const getUserChannelSubscribers = asynchandler(async (req, res) => {
-    const {channelId} = req.params
+    const user_id = req.user?._id;
 
-  const noOfSubscribers =   await  Subscription.find({channel:channelId})
+  const noOfSubscribers =   await  Subscription.find({channel:user_id})
     res.status(200).json(
         new apiresponse(200,noOfSubscribers,"successfully")
     )
 })
 
+
+// controller to return channel list to which user has subscribed
 const getSubscribedChannels = asynchandler(async (req, res) => {
-    const { subscriberId } = req.params
-    const meSubscripedToHowMany = await  Subscription.find({subscriber:subscriberId})
+    const user_id = req.user?._id;
+    // const meSubscripedToHowMany = await  Subscription.find({subscriber:user_id})
+
+    const meSubscripedToHowMany = await Subscription.aggregate([
+        {
+        $match: { subscriber: user_id }
+        },
+        {
+            $lookup:{
+                from: 'users',
+                localField:'channel',
+                foreignField: '_id',
+                as:"channel_detail",
+                pipeline:[
+                    {
+                        $project:{
+                            _id:1,
+                            fullname:1,
+                            avatar:1
+                        }
+                    }
+                  
+                ]
+            }
+        },
+        
+])
     res.status(200).json(
         new apiresponse(200,meSubscripedToHowMany,"successfully")
     )

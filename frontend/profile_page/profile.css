@@ -379,9 +379,14 @@
  
  .subscribed-list a img{
      width: 25px;
+     height: 25px;
+     margin-left: 10px;
      border-radius: 50%;
      margin-right: 20px;
- 
+ }
+
+ .subscribed-list h3{
+    margin-left: 10px;
  }
  
  .small-sidebar{
@@ -494,8 +499,9 @@
 #sec2 ul{
      list-style: none;
      display: inline-flex;
+     justify-content: space-evenly;
      margin-bottom: 13px;
-     
+     /* border: 2px solid red; */
 }
 
 #sec2 li{
@@ -503,6 +509,14 @@
      font-size: 17px;
      font-weight: bold;
      cursor: pointer;
+     /* border: 2px solid red; */
+     padding: 5px;
+     border-radius: 10px;
+     /* background-color: red; */
+}
+
+#sec2 li:hover{
+    background-color: rgb(225, 224, 224);
 }
 
 
@@ -516,6 +530,7 @@
      padding-right: 10%;
      justify-content: center;
      /* border: 2px solid red; */
+     display: none;
 }
 
 #sec3 img{
@@ -531,6 +546,66 @@
      margin-bottom: 5px;
      font-size: 17px;
      font-weight: 500;
+}
+
+
+ /* -----------main---------- */
+ 
+ .home{
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* display: none; */
+}
+
+ .home .vid{
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+
+    margin-bottom: 17px;
+    justify-content: space-between;
+}
+
+.vid a{
+    text-decoration: none;
+}
+
+.vid img {
+    /* border: 2px solid red; */
+    flex-basis: 30%;
+    width: 400px;
+    height: 210px;
+    border-radius: 15px;
+    object-fit: cover; /* Crop the image to fit the container while preserving aspect ratio */
+    box-shadow: 2px 2px 2px 2px gray;
+}
+
+
+.vid .vid_detail{
+    flex-basis: 70%;
+    margin-left: 20px;
+    height: auto;
+}
+
+
+.vid_detail .video_title{
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+
+.vid_detail .channel_detail{
+    display: flex;
+    margin-bottom: 10px;
+
+}
+
+
+.channel_detail .channel_name{
+     margin-right: 10px;
 }
 
 

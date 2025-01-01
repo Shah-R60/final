@@ -1,5 +1,4 @@
 
-//
 //search logic
 
 const search_input = document.querySelector(".search_input");
@@ -90,7 +89,7 @@ logout.addEventListener("click",()=>{
    logOut_fun();
 })
 
-
+//main
 
 //current user profile
 let avatar_l = document.querySelectorAll("#avatar");
@@ -100,19 +99,37 @@ let full = document.querySelector(".name");
 let user_n = document.querySelector(".user_name");
 let subscriber_element = document.querySelector(".subscriber");
 let current_user_name = "";
-
+let user_id="";
 //logic for profile
+
+let urlParams = new URLSearchParams(window.location.search)
+let owner_id = urlParams.get('owner_id')
+let search_element = window.location.search
 
 async function profile_updatae() {
      try{
+
+
              //  get current user data
-             const user_data = await fetch('http://localhost:3000/api/v1/user/current-user', {
-               method: 'GET',
-               credentials: 'include' // Ensures cookies are sent
-           });
+             let user_data ="";
+              if(search_element=="")
+              {
+                   user_data = await fetch('http://localhost:3000/api/v1/user/current-user', {
+                    method: 'GET',
+                    credentials: 'include' // Ensures cookies are sent
+                });
+              }
+              else
+              {
+                  user_data = await fetch(`http://localhost:3000/api/v1/user/id_user/${owner_id}`, {
+                    method: 'GET',
+                    credentials: 'include' // Ensures cookies are sent
+                });
+              }
 
            const user = await user_data.json();
-
+           user_id = user.data._id;
+           console.log(user_id)
            full_name.textContent = user.data.fullname
            user_name.textContent = user.data.username
            full.textContent = user.data.fullname
@@ -135,7 +152,7 @@ async function profile_updatae() {
        credentials: 'include' // Ensures cookies are sent
       });
       const subscriber = await subscriber_response.json();
-      console.log(subscriber.data.subscribersCount);
+      // console.log(subscriber.data._id);
       subscriber_element.textContent = `${subscriber.data.subscribersCount} Subscriber`
       }catch(error)
       {
@@ -161,4 +178,118 @@ channel_logo.addEventListener("mouseleave",()=>{
      shah.style.opacity = "0"
 })
 
+
+
+// subscriber list
+
+// const subscriber_image = document.querySelector(".subscriber_image")
+// const subscriber_name = document.querySelector(".subscriber_name");
+const subscribed_content = document.querySelector(".subscribed_content");
+async function subscribed_fun() {
+    try{
+          const subsciber_response = await fetch("http://localhost:3000/api/v1/subscription/getSubscribed",{
+            method:"GET",
+            credentials:"include",
+          })
+          // console.log(subsciber_response)
+          // console.log("hsisiasubscriber")
+          const subsciber_json = await subsciber_response.json();
+          // console.log(subsciber_json.data);
+          const subsciber_data = subsciber_json.data;
+          let subscriber_innerHTML = "";
+          subsciber_data.forEach((element)=>{
+            const subscriber_id = element.channel_detail[0]._id;
+            const subscriber_avatar = element.channel_detail[0].avatar;
+            const subsciber_fullname = element.channel_detail[0].fullname;
+              subscriber_innerHTML+=`
+               <a href="/frontend/profile_page/profile.html?owner_id=${subscriber_id}"><img src="${subscriber_avatar}" class="subscriber_image"><p class="subscriber_name">${subsciber_fullname}</p></a>
+              `
+          })
+
+          subscribed_content.innerHTML = subscriber_innerHTML
+          
+    }
+    catch(error){
+       throw new error("error at subscriber")
+    }
+
+} 
+
+subscribed_fun()
+
+// home
+
+const home_li = document.querySelector(".home_li")
+const home = document.querySelector(".home")
+const sec = document.querySelector("#sec3")
+
+// home_li.addEventListener("click",()=>{
+//     home.style.display = "flex"
+//     sec.style.display = "none"
+//     home_fun();
+// })
+
+home_fun();
+
+async function home_fun() {
+  try{
+    const home_response = await fetch("http://localhost:3000/api/v1/video/getAllVideos?limit=100",{
+      method:"GET",
+      credentials:"include",
+    });
+    // console.lg()
+    const home_json =await home_response.json();
+    // console.log(json_home_response.data[0].owner);
+    const data = home_json.data;
+    console.log(data)
+    let homeHTML = "";
+    let county=0;
+    data.forEach((element)=>{
+      let home_id = element.owner;
+      if(home_id==user_id)
+      {
+       
+        county++;
+        const thumbnail = element.thumbnail;
+        const videoLink = element.videoFile
+        const videoTitle = element.title
+        const videoDescription = element.description
+        const videoView = element.views
+        const owner_full_name = element.owner.fullname
+        const playlink = `/frontend/play.folder/play.html?link=${videoLink}&id=${element._id}`
+        homeHTML+=
+        `
+        <div class="vid">
+                <a href=${playlink}><img src="${thumbnail}" alt="" class="thumbnail"> </a>
+                    <div class="vid_detail">
+                            <div class="video_title">
+                               ${videoTitle}
+                            </div>
+                        <div class="channel_detail">
+                              
+                                <div class="view">
+                                  ${videoView} Views
+                                </div>
+                        </div>
+                            <div class="discription">
+                               ${videoDescription}
+                            </div>
+                    </div>
+            </div>
+        `
+      }
+    })
+    if(county==0){
+      home.style.display = "none";
+      sec.style.display = "flex";
+    }
+    home.innerHTML = homeHTML;
+  }
+  catch(error)
+  {
+   console.log("some error in home function",error);
+  }
+}
+
+//
 

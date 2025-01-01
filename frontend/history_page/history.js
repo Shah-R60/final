@@ -190,6 +190,41 @@ async function  history_fun() {
 
 history_fun()
 
+//subscribe logic
+
+const subscribed_content = document.querySelector(".subscribed_content");
+async function subscribed_fun() {
+    try{
+          const subsciber_response = await fetch("http://localhost:3000/api/v1/subscription/getSubscribed",{
+            method:"GET",
+            credentials:"include",
+          })
+          // console.log(subsciber_response)
+          // console.log("hsisiasubscriber")
+          const subsciber_json = await subsciber_response.json();
+          console.log(subsciber_json.data);
+          const subsciber_data = subsciber_json.data;
+          let subscriber_innerHTML = "";
+          subsciber_data.forEach((element)=>{
+            const subscriber_id = element.channel_detail[0]._id;
+            const subscriber_avatar = element.channel_detail[0].avatar;
+            const subsciber_fullname = element.channel_detail[0].fullname;
+              subscriber_innerHTML+=`
+               <a href="/frontend/profile_page/profile.html?owner_id=${subscriber_id}"><img src="${subscriber_avatar}" class="subscriber_image"><p class="subscriber_name">${subsciber_fullname}</p></a>
+              `
+          })
+
+          subscribed_content.innerHTML = subscriber_innerHTML
+          
+    }
+    catch(error){
+       throw new error("error at subscriber")
+    }
+
+} 
+
+
+subscribed_fun()
 
 
 

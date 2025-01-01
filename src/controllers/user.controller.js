@@ -279,6 +279,14 @@ const getCurrentUser =  asynchandler(async(req,res)=>{
   .status(200)
   .json(new apiresponse(200,req.user,"user fetch successfully"))
 })
+
+const getUserById = asynchandler(async(req,res)=>{
+  const user_id = req.params.id;
+  const user = await User.findById(user_id);
+  return res
+  .status(200)
+  .json(new apiresponse(200,user,"user fetch successfully"))
+})
 // *********************update account detail***********
 const updateAccountDetails = asynchandler(async(req,res)=>{
   const {fullname,email}=req.body
@@ -513,6 +521,7 @@ export {
   refreshAccessToken,
   changeCurrentPassword,
   getCurrentUser,
+  getUserById,
   updateAccountDetails,
   updatedUserAvatar,
   updatedUsercoverImage,
