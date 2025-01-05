@@ -8,6 +8,9 @@ const tweetSchema = new Schema({
   owner:{
     type: Schema.Types.ObjectId,
     ref: 'User',
+  },
+  tweet_photo:{
+    type:String
   }
 },{timestamps:true})
 

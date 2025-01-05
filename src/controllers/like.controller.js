@@ -18,14 +18,20 @@ const toggleVideoLike = asynchandler(async (req, res) => {
         if(store.length==0)
         {
            await Like.create({
-                Video:videoId
+                Video:videoId,
+                likedBy:req.user?._id
             })
+
+            res.status(200).json(
+                new apiresponse(200,"liked video")
+            )
         }else{
            await Like.deleteOne({Video:videoId});
-        }
-        res.status(200).json(
-            new apiresponse(200,"ok")
+           res.status(200).json(
+            new apiresponse(200,"remove liked")
         )
+        }
+        
 })
 
 const toggleCommentLike = asynchandler(async (req, res) => {
@@ -40,7 +46,8 @@ const toggleCommentLike = asynchandler(async (req, res) => {
    if(like.length==0)
    {
       await Like.create({
-        comment:commentId
+        comment:commentId,
+        likedBy:req.user?._id
       })
    }
    else{
@@ -69,7 +76,8 @@ const toggleTweetLike = asynchandler(async (req, res) => {
     {
         await Like.create(
             {
-            tweet:tweetId
+            tweet:tweetId,
+            likedBy:req.user?._id
             });
     }
     else{
@@ -88,7 +96,8 @@ const getLikedVideos = asynchandler(async (req, res) => {
         {
             $project:{
                 _id:0,
-                Video:1
+                Video:1,
+                likedBy:1
             }
         }
     ])
@@ -96,8 +105,21 @@ const getLikedVideos = asynchandler(async (req, res) => {
     return res.status(200).json(
         new apiresponse(200,likeVideo,"okk")
     )
-
 })
+
+
+const getnoOfLike = asynchandler(async(req,res)=>{
+    const video_id = req.params._id;
+    const noOflike = await Like.aggregate([
+        {
+            $match:{
+                Video:video_id
+            }
+        },
+        
+    ])
+})
+
 
 
 export {

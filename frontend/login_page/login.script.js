@@ -14,7 +14,7 @@ let input_password = document.querySelector(".password")
 let input_avatar = document.querySelector(".avatar");
 let input_coverImage = document.querySelector(".coverImage");
 
-let avartar_but = document.querySelector(".avatar-but")
+let avatar_but = document.querySelector(".avatar-but")
 let cover_but = document.querySelector(".cover-but")
 
 
@@ -47,7 +47,7 @@ signupBtn.addEventListener("click",()=>{
 
 let avatar_res, cover_res;
 alt.style.display = "none"
-avartar_but.addEventListener("click",()=>{
+avatar_but.addEventListener("click",()=>{
      input_avatar.click();
 })
 
@@ -70,15 +70,15 @@ cover_but.addEventListener("click",()=>{
           if(flag=="signup")
           {
               
-               if(input_username&&input_fullname&&input_email&&input_password&&avatar_res&&cover_res)
+               if(input_username&&input_fullname&&input_email&&input_password)
                {
                     const formData = new FormData()
                     formData.append("email",input_email.value);
                     formData.append("password",input_password.value);
                     formData.append("username",input_username.value);
                     formData.append("fullname",input_fullname.value);
-                    formData.append("coverImage",avatar_res);
-                    formData.append("avatar",cover_res);
+                    formData.append("avatar",avatar_res);
+                    formData.append("coverImage",cover_res);
                     // console.log("hi");
                     try{
                          const response = await fetch('http://localhost:3000/api/v1/user/register',{

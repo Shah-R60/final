@@ -240,7 +240,7 @@ async function subscribed_fun() {
             const subscriber_avatar = element.channel_detail[0].avatar;
             const subsciber_fullname = element.channel_detail[0].fullname;
               subscriber_innerHTML+=`
-               <a href="/frontend/profile_page/profile.html?owner_id=${subscriber_id}"><img src="${subscriber_avatar}" class="subscriber_image"><p class="subscriber_name">${subsciber_fullname}</p></a>
+               <a href="/frontend/subscriber_profile/subscriber.html?owner_id=${subscriber_id}"><img src="${subscriber_avatar}" class="subscriber_image"><p class="subscriber_name">${subsciber_fullname}</p></a>
               `
           })
 

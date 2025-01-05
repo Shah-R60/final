@@ -26,8 +26,8 @@ import fs from 'fs'
 
             //file has been upload successfull
         }catch(error){
-            fs.unlinkSync(localfilepath)//remove the
-            //locally saved temporary file as the uload operation got failed
+            fs.unlinkSync(localfilepath)
+            // remove the locally saved temporary file as the uload operation got failed
             return null;
         }
     }

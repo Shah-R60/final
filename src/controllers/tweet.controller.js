@@ -4,27 +4,39 @@ import {User} from "../models/user.model.js"
 import {apierror} from "../utils/apierror.js"
 import {apiresponse} from "../utils/apiresponce.js"
 import {asynchandler} from "../utils/asynchandler.js"
+import { uploadoncloudinary } from "../utils/cloudnary.js"
 
 const createTweet = asynchandler(async (req, res) => {
     //TODO: create tweet
-    const user = await User.findById(req.user.id)
+    const user = await User.findById(req.user?._id)
     if (!user) {
         return apierror(res, 401, "User not found")
-        }
+    }
         
-   const content = req.body.content;
+   const {content} = req.body;
+   let photo_localpath ;
+   if(req.files&&Array.isArray(req.files.tweet_photo)&&req.files.tweet_photo.length>0)
+   {
+    photo_localpath = req.files.tweet_photo[0].path
+   }
+
+   const tweet_photo = await uploadoncloudinary(photo_localpath);
+
     if(!content)
     {
         throw new apierror(200,"content is missing");
     }
+
+    // const tweet_photo = req.body.tweet_photo;
     const tweet =await Tweet.create({
         owner:user,
-        content:content
+        content:content,
+        tweet_photo:tweet_photo?.url||""
     })
 
     return res.status(200)
     .json(
-        new apiresponse(200,"tweet has successfully posted")
+        new apiresponse(200,tweet,"tweet has successfully posted")
     )
 })
 
@@ -42,7 +54,8 @@ const getUserTweets = asynchandler(async (req, res) => {
     },
         {
             $project:{
-                content:1
+                content:1,
+                tweet_photo:1
             }
         }])
     if(!getTweet){

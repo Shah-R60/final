@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="/frontend/util_page/util.css">
+     <link rel="stylesheet" href="subscriber.css">
+     <title>Profile_page</title>
+</head>
+<body>
+          <nav class="flex-div">
+              <div class="nav-left">
+                  <img src="/frontend/image.folder/menu.jpg" class="menu_icon">
+                  <img src="/frontend/image.folder/logo_light.png" class="logo_icon">
+              </div>
+      
+                            
+                <!-- -------------------nav-mid------------- -->
+
+                <div class="nav-middle">
+                    <div class="search-box">
+                            <input type="text" placeholder="Search" class="search_input" >
+                        <img src="/frontend/image.folder/search.png" class="search_icon">
+                    </div>
+                    <img src="/frontend/image.folder/mike.png" class="mike_icon">
+                </div>
+
+                <!-- -----nav-right--- -->
+              <div class="nav-right ">
+                  <ul class="nav_ul">
+                      <li class="nav_li  upload_li">
+                          <img src="/frontend/image.folder/upload.png" class="upload">
+                          <div class="sub-class">
+                              <ul class="upload_ul">
+                                  <li><img src="/frontend/image.folder/upload_video.png" alt=""><a href="">Upload Video</a></li>
+                                  <li><img src="/frontend/image.folder/upload_post.png" alt=""><a href="">Upload Post</a></li>
+                              </ul>
+                          </div>
+                      </li>
+                      <li class="nav_li"><img src="/frontend/image.folder/notification.png" class="img2"></li>
+                      <li class="nav_li profile_li">
+                          <img src="/frontend/image.folder/avatar.jpg" id="avatar">
+                          <div class="profile_sub_class  ">
+                              <div class="profile_detail">
+                                 
+                                      <div class="profile_icon">
+                                          <img src="/frontend/image.folder/avatar.jpg" id="avatar" class="av">
+                                      </div>
+                                      <div class="profile_name">
+                                          <p class="fullName"> shahll rahul</p>
+                                          <p class="userName">shah-R60</p>
+                                          <a href="">View your channel</a>
+                                      </div>
+                              </div>
+                              <hr>
+                              <div class="logOut" style="color: black;">
+                                 <img src="/frontend/image.folder/logout.png" alt="logOut">
+                                 <h4>Sign Out</h4>
+                              </div> 
+                          </div>
+                      </li>
+                      <li class="nav_li" id="signInIcon" style="display: none;" ><button class="signInBtn"><img src="../frontend/image.folder/signin.png" id="avatar"><p>sign in</p></button></li>
+                  </ul> 
+              </div>
+          </nav>
+     <!-- ---------------------------navbar---------------------------       -->
+     
+ <!-- -------------------------sidebar--------------------------- -->
+
+
+     <div class="sidebar">
+          <div class="shortcut-link">
+          <a href="/view/index.html?flag=signin" class="short sign"><img src="/frontend/image.folder/home.png" alt=""><p>Home</p> </a>
+          <a href=""  class="short sign"><img src="/frontend/image.folder/explore.png" alt=""><p>Explore</p></a>
+          <a href="" class="short sign"><img src="/frontend/image.folder/subscription.png" alt=""><p>Subcriptions</p></a>
+          <hr>
+          <a href="" class="short sign"><h4>You ></h3></a>
+          <a href="/frontend/history_page/history.html" class="short sign "><img src="/frontend/image.folder/history.png" alt=""><p>History</p></a>
+          <a href="" class="short" ><img src="/frontend/image.folder/watch_letter.png" alt=""><p>watch Later</p></a>
+          <a href="" class="short"><img src="/frontend/image.folder/playlist.png" alt=""><p>playlist</p></a>
+          <a href="" class="short"><img src="/frontend/image.folder/liked_video.png" alt=""><p>Liked video</p></a>
+          <hr class="hr">
+          <!-- <a href="" class="short singInInfo sign"><p class="info">Sign in to like videos, comment, and subscribe.</p> <button class="signInBtn sidebar_signInBtn"><img src="../frontend/image.folder/signin.png" id="avatar"><p>sign in</p></button> </a> -->
+          <!-- <hr> -->
+          </div>
+          
+         <!-- // subscribe -->
+            <div class="subscribed-list">
+                <H3>SUBSCRIBED</H3>
+                <div class="subscribed_content">    
+                </div>
+            </div>
+     </div>
+
+     <!-- ---------------------------main--------------------------- -->
+
+
+     <div class="main"  style="color: black;">
+        <div class="sec" id="sec1">
+             <div class="channel_logo">
+                  <img src="/frontend/image.folder/avatar_update copy.png" id="logob">
+             </div>
+             <div class="channel_detail">
+                  <!-- name of user -->
+                  <div class="name">
+                       <p>shah raffhul</p>
+                  </div>
+
+
+                  <!-- username of user -->
+                  <div class="user_name">
+                       <p>shah_R60</p>
+                  </div>
+
+                  <!-- no of subscriber -->
+                  <div class="subscriber">
+                       <p>- subscriber</p>
+                  </div>
+
+                  <!-- edit button -->
+                  <button class="edit">
+                       Edit Profile
+                  </button>
+                              
+             </div>
+        </div>
+
+
+        <div class="sec" id="sec2">
+               <ul>
+                <li class="home_li">Home</li>
+                <li class="playlist_li">playlist</li>
+                <li class="cummunity_li">Community</li>
+               </ul>
+        </div>
+
+        <hr>
+
+        <div class="sec" id="sec3">
+            <!-- Lorem ipsum dolor sit amet consectetur. -->
+             <img src="/frontend/image.folder/film.png" alt="">
+            <p>Create Content on any device</p>
+            <p>Upload videos, live streams, and more</p>
+            <p>EveryThing that you make public will appear here</p>
+        </div>
+        
+        <div class="home">
+            <!-- <div class="vid">
+                <a href=><img src="/frontend/image.folder/thumbnail.jpg" alt="" class="thumbnail"> </a>
+                    <div class="vid_detail">
+                            <div class="video_title">
+                               best youtube channel to learn 
+                            </div>
+                        <div class="channel_detail">
+                                <div class="channel_name">
+                                  rahul shah
+                                </div>
+                                <div class="view">
+                                  120 Views
+                                </div>
+                        </div>
+                            <div class="discription">
+                              ha ha ha ha ha ha
+                            </div>
+                    </div>
+            </div> -->
+        </div>
+   </div>
+
+ 
+
+
+
+
+</body>
+
+<script src="subscriber.js"></script>
+
+
+</html>
