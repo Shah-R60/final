@@ -318,9 +318,21 @@ tweet_photo_btn.addEventListener("click",()=>{
 })
 
 let tweet_photo_res="";
+
+let uploaded_image = document.querySelector('.uploaded_image');
+let tweet_img_element = document.querySelector('.tweet_img_element');
+
 tweet_photo_input.addEventListener("change",(event)=>{
    tweet_photo_res = event.target.files[0];
    console.log(tweet_photo_res)
+   if(tweet_photo_res)
+   {
+      uploaded_image.style.display = "flex"
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        tweet_img_element.src = event.target.result; // Set the image src to the file data
+      };
+      reader.readAsDataURL(tweet_photo_res);   }
 })
 
 
@@ -378,8 +390,8 @@ async function show_tweet_fun() {
           const show_tweet_fun_data = show_tweet_json.data;
 
           let show_tweet_html = "";
-          console.log(show_tweet_fun_data)
-          console.log("Number of tweets:", show_tweet_fun_data.length);
+          // console.log(show_tweet_fun_data)
+          // console.log("Number of tweets:", show_tweet_fun_data.length);
 
           // loop though tweet
           show_tweet_fun_data.forEach((element)=>{
@@ -387,10 +399,10 @@ async function show_tweet_fun() {
             let tweet_image = element.tweet_photo;
             let tweet_idd = element._id;
             // console.log(tweet_id);
-            console.log(typeof tweet_image)
+            // console.log(typeof tweet_image)
             if(tweet_image!="")
             {
-              console.log(tweet_image)
+              // console.log(tweet_image)
               show_tweet_html+=`
               <div class="show">
                     <div class="show_avatar">
@@ -406,16 +418,21 @@ async function show_tweet_fun() {
                             <div class="show_tweet_image">
                                 <img src="${tweet_image}" alt="">
                             </div>
-                            <div class="tweet_reaction">
+
+                        <div class="tweet_reaction">
+                            <div>
                                 <img src="/frontend/image.folder/like.png" alt="">
                                 <img src="/frontend/image.folder/dislike.png" alt="">
                             </div>
+                            <button class="tweet_update_button" style="display: none;">post</button>
+                        </div>
+
                     </div>
                     <div class="option">
                         <img src="/frontend/image.folder/option.png" alt="" class="edit_delete"">
                         <div class="option_sub_class"  id="${tweet_idd}">
                             <ul class="option_ul ">
-                                <li class="option_li"><img src="/frontend/image.folder/edit.png" alt="">edit</li>
+                                <li class="option_li tweet_edit"><img src="/frontend/image.folder/edit.png" alt="">edit</li>
                                 <li class="option_li tweet_delete"><img src="/frontend/image.folder/delete.png" alt="">delete</li>
                             </ul>
                         </div>
@@ -440,20 +457,24 @@ async function show_tweet_fun() {
                            
 
                             <div class="tweet_reaction">
+                            <div>
                                 <img src="/frontend/image.folder/like.png" alt="">
                                 <img src="/frontend/image.folder/dislike.png" alt="">
                             </div>
+                            <button class="tweet_update_button" style="display: none;">post</button>
+                        </div>
+
                     </div>
                     <div class="option">
                         <img src="/frontend/image.folder/option.png" alt="" class="edit_delete"  >
                         <div class="option_sub_class"  id="${tweet_idd}">
                             <ul class="option_ul">
-                                <li class="option_li"><img src="/frontend/image.folder/edit.png" alt="">edit</li>
+                                <li class="option_li tweet_edit"><img src="/frontend/image.folder/edit.png" alt="">edit</li>
                                 <li class="option_li tweet_delete"><img src="/frontend/image.folder/delete.png" alt="">delete</li>
                             </ul>
                         </div>
                     </div>
-                </div>
+              </div>
             `
             }
             
@@ -472,14 +493,88 @@ show_tweet_fun()
 let optionUl="";
 document.addEventListener("click", function (event) {
   if (event.target && event.target.classList.contains("edit_delete")) {
-    // console.log(event.target);
-      // Handle the click on the "edit_delete" button
       optionUl = event.target.closest(".option").querySelector(".option_sub_class");
-      console.log(typeof optionUl.attributes.id.value);
       optionUl.classList.toggle("option_ul_click");
   }
   else if(event.target&&event.target.classList.contains("tweet_delete")){
-      console.log(event.target)
+        async function tweet_delete_fun() {
+          try{
+            //  const tweet_delete_id = event.target.closest(".option").querySelector(".option_sub_class")
+            let tweet_delete_id =  optionUl.attributes.id.value;
+            const tweet_delete_response = await fetch(`http://localhost:3000/api/v1/tweet/c/${tweet_delete_id}`,{
+              method: "DELETE",
+              credentials:"include"
+            })
+
+            console.log(tweet_delete_response)
+            window.location.reload()
+
+          }catch(error)
+          {
+            console.log("eeeoee")
+          }
+        }
+
+        tweet_delete_fun();
+  }
+  //update_tweet
+  else if(event.target&&event.target.classList.contains("tweet_edit"))
+  {
+   
+    let tweet_delete_id =  optionUl.attributes.id.value;
+    const tweet_edit_text = event.target.closest(".show").querySelector(".tweet_text p");
+    optionUl.classList.toggle("option_ul_click");
+    // Make the element editable
+    tweet_edit_text.setAttribute("contenteditable", "true");
+
+    // Focus the element
+    tweet_edit_text.focus();
+    tweet_edit_text.style.border="0px"
+    tweet_edit_text.style.outline = "0px"
+    // Place the cursor at the end of the text
+    const range = document.createRange();
+    const selection = window.getSelection();
+    range.selectNodeContents(tweet_edit_text);
+    range.collapse(false); // Collapse range to the end
+    selection.removeAllRanges();
+    selection.addRange(range);
+
+    const option_ul = event.target.closest(".show").querySelector(".tweet_update_button")
+   
+    option_ul.style.display = "block"
+    option_ul.addEventListener("click",()=>{
+      async function update_tweet_fun() {
+        try{
+            const update_tweet_response = await fetch(`http://localhost:3000/api/v1/tweet/c/${tweet_delete_id}`,{
+              method: 'PATCH',
+              headers:{
+                'Content-type':'application/json'
+              },
+              // body: JSON.stringify({text:tweet_edit_text.textContent})
+              body:JSON.stringify({
+                "content":`${tweet_edit_text.textContent}`
+              }),
+              credentials:"include"
+              
+            })
+
+            if(update_tweet_response)
+            {
+              window.location.reload()
+            }
+        }catch(error)
+        {
+          console.log("error at update tweet function",error)
+        }
+      }
+  
+      update_tweet_fun()
+    //   setTimeout(() => {
+    //       window.location.reload()
+    //   }, 1000);
+    // })
+  
+    })
   }
   else
   {
@@ -487,17 +582,12 @@ document.addEventListener("click", function (event) {
   }
 });
 
-
-
-
-
-
 //update tweet
 const edit_delete = document.querySelector(".edit_delete");
 const option_sub_class = document.querySelector(".option_sub_class");
 
-console.log(edit_delete);
-console.log(option_sub_class);
+// console.log(edit_delete);
+// console.log(option_sub_class);
 
 edit_delete.onclick = function () {
     console.log("Clicked!");

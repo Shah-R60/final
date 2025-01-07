@@ -145,8 +145,8 @@ async function playVideo() {
                 }
 
                 const video = await video_response.json();
-                console.log(video.data)
-                console.log("hii")             
+                // console.log(video.data)
+                // console.log("hii")             
                    
                 video_title_element.textContent = video.data.title;
                 // console.log(video.data.owner[0].avatar)
@@ -156,16 +156,16 @@ async function playVideo() {
 
                 //Subscriber count
                 const username = video.data.owner[0].username
-                console.log(username)
+                // console.log(username)
                 const user_response = await fetch(`http://localhost:3000/api/v1/user/c/${username}`,{
                     method: 'GET',
                     credentials: "include"
                 })
                 const user = await user_response.json();
-                console.log(user.data)
+                // console.log(user.data)
                 subscriber.textContent = `${user.data.subscribersCount} Subscriber`;
                 const isSubscribe = user.data.isSubscribed;
-                console.log(typeof isSubscribe, isSubscribe); 
+                // console.log(typeof isSubscribe, isSubscribe); 
                 subscrie_status=isSubscribe
                 if (isSubscribe == true) {
                     subscriber_button.style.backgroundColor = "rgb(235, 235, 235)"; // Corrected value
@@ -285,10 +285,26 @@ async function show_video(){
 
     }
   }
-
+  
   show_video()
+//fullScreen change
 
-
-
-
+const video = document.querySelector('video');
+console.log(video)
+document.addEventListener("keydown",(event)=>{
+    if(event.key === "f"||event.key==="F"){
+        if(!document.fullscreenElement)
+        {
+            video.requestFullscreen().catch((err)=>{
+                console.error(err);
+            })
+        }
+        else
+        {
+            document.exitFullscreen().catch((err)=>{
+                console.error(err);
+            })
+        }
+    }
+})
 
