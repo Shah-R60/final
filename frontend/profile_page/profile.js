@@ -380,9 +380,13 @@ async function show_tweet_fun() {
           let show_tweet_html = "";
           console.log(show_tweet_fun_data)
           console.log("Number of tweets:", show_tweet_fun_data.length);
+
+          // loop though tweet
           show_tweet_fun_data.forEach((element)=>{
             let tweet_text_jdj = element.content;
             let tweet_image = element.tweet_photo;
+            let tweet_idd = element._id;
+            // console.log(tweet_id);
             console.log(typeof tweet_image)
             if(tweet_image!="")
             {
@@ -408,11 +412,11 @@ async function show_tweet_fun() {
                             </div>
                     </div>
                     <div class="option">
-                        <img src="/frontend/image.folder/option.png" alt="" class="edit_delete">
-                        <div class="option_sub_class">
-                            <ul class="option_ul">
+                        <img src="/frontend/image.folder/option.png" alt="" class="edit_delete"">
+                        <div class="option_sub_class"  id="${tweet_idd}">
+                            <ul class="option_ul ">
                                 <li class="option_li"><img src="/frontend/image.folder/edit.png" alt="">edit</li>
-                                <li class="option_li"><img src="/frontend/image.folder/delete.png" alt="">delete</li>
+                                <li class="option_li tweet_delete"><img src="/frontend/image.folder/delete.png" alt="">delete</li>
                             </ul>
                         </div>
                     </div>
@@ -441,11 +445,11 @@ async function show_tweet_fun() {
                             </div>
                     </div>
                     <div class="option">
-                        <img src="/frontend/image.folder/option.png" alt="" class="edit_delete">
-                        <div class="option_sub_class">
+                        <img src="/frontend/image.folder/option.png" alt="" class="edit_delete"  >
+                        <div class="option_sub_class"  id="${tweet_idd}">
                             <ul class="option_ul">
                                 <li class="option_li"><img src="/frontend/image.folder/edit.png" alt="">edit</li>
-                                <li class="option_li"><img src="/frontend/image.folder/delete.png" alt="">delete</li>
+                                <li class="option_li tweet_delete"><img src="/frontend/image.folder/delete.png" alt="">delete</li>
                             </ul>
                         </div>
                     </div>
@@ -465,17 +469,40 @@ async function show_tweet_fun() {
 
 show_tweet_fun()
 
+let optionUl="";
+document.addEventListener("click", function (event) {
+  if (event.target && event.target.classList.contains("edit_delete")) {
+    // console.log(event.target);
+      // Handle the click on the "edit_delete" button
+      optionUl = event.target.closest(".option").querySelector(".option_sub_class");
+      console.log(typeof optionUl.attributes.id.value);
+      optionUl.classList.toggle("option_ul_click");
+  }
+  else if(event.target&&event.target.classList.contains("tweet_delete")){
+      console.log(event.target)
+  }
+  else
+  {
+    optionUl.classList.remove("option_ul_click");
+  }
+});
+
+
+
 
 
 
 //update tweet
-const edit_delete = document.querySelectorAll(".edit_delete");
-const option_sub_class = document.querySelectorAll(".option_sub_class");
+const edit_delete = document.querySelector(".edit_delete");
+const option_sub_class = document.querySelector(".option_sub_class");
 
 console.log(edit_delete);
+console.log(option_sub_class);
 
 edit_delete.onclick = function () {
     console.log("Clicked!");
     option_sub_class.classList.toggle("sub_class_click");
 };
+
+//rahul shah rahul shha
 

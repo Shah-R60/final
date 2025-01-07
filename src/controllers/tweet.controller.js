@@ -43,17 +43,19 @@ const createTweet = asynchandler(async (req, res) => {
 
 const getUserTweets = asynchandler(async (req, res) => {
     // TODO: get user tweets
-    const userId = req.param;
-    if(!userId){
+    const user_Id = req.params.userId;
+    if(!user_Id){
         throw new apierror(400,"User id is nesessary");
     }
    const getTweet = await Tweet.aggregate([{
         $match:{
-            owener:userId
+            // owner: new mongoose.Types.ObjectId(user_Id)
+           owner: new mongoose.Types.ObjectId(user_Id)
         }
     },
         {
             $project:{
+                owner:1,
                 content:1,
                 tweet_photo:1
             }
