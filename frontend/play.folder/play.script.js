@@ -116,7 +116,7 @@ profile_updatae();
 // -----------------main-------------------------------
 const urlParams = new URLSearchParams(window.location.search);
 const link = urlParams.get('link');
-const videoId = urlParams.get('id');
+let videoId = urlParams.get('id');
 
 const videoLink_element = document.querySelector('video');
 
@@ -281,19 +281,20 @@ async function show_video(){
         right_video_container.innerHTML = videoHTML;
         
     }
-    catch{
-
+    catch(err){
+        console.log("error in show function",err)
     }
   }
-  
+
   show_video()
 //fullScreen change
 
+
+
 const video = document.querySelector('video');
-console.log(video)
-document.addEventListener("keydown",(event)=>{
-    if(event.key === "f"||event.key==="F"){
-        if(!document.fullscreenElement)
+
+function toggleFullscreen() {
+    if(!document.fullscreenElement)
         {
             video.requestFullscreen().catch((err)=>{
                 console.error(err);
@@ -305,6 +306,73 @@ document.addEventListener("keydown",(event)=>{
                 console.error(err);
             })
         }
+}
+
+document.addEventListener("keydown",(event)=>{
+    if(event.key === "f"||event.key==="F"){
+        toggleFullscreen()
     }
 })
+
+
+
+
+//comments
+
+const comment_input_element = document.querySelector(".comment_input_element")
+const comment_button = document.querySelector(".comment_button")
+
+
+comment_input_element.addEventListener("keydown",(event)=>{
+    event.stopPropagation();//prevent interfering with global key events
+})
+
+
+comment_button.addEventListener("click",()=>{
+
+    if (!comment_input_element.value.trim()) {
+        console.log("Comment cannot be empty");
+        return;
+    }
+    upload_comment_fun();
+})
+
+async function upload_comment_fun() {
+    try{
+         const upload_comment_response = await fetch(`http://localhost:3000/api/v1/comment/${videoId}`,{
+            method: "POST",
+            headers:{
+                'Content-type':'application/json'
+            },
+            body: JSON.stringify({
+                "content": `${comment_input_element.value}`
+            }),
+            credentials:"include"
+         })
+         
+         const upload_comment_json = await upload_comment_response.json()
+         if(upload_comment_json)
+         {
+            comment_input_element.value = "";
+            window.location.reload()
+         }
+    }
+    catch(err)
+    {
+        console.log("error at upload comment function",err)
+    }
+}
+
+
+async function displayCommentsFun(event) {
+    try{
+            
+    }
+    catch(err)
+    {
+        console.log("error at display comments function",err)
+    }
+}
+
+displayCommentsFun()
 

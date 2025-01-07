@@ -350,6 +350,15 @@ async function tweet_fun() {
                body:formData,
                credentials:"include"
             })
+
+           const tweet_json = await tweet_response.json();
+            if(tweet_json)
+            {
+              tweet_input.value = "";
+              window.location.reload()
+            }
+           
+
           }catch(error)
           {
             console.log("error at tweet function",error)

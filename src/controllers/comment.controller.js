@@ -31,22 +31,26 @@ const getVideoComments = asynchandler(async (req, res) => {
 
 const addComment = asynchandler(async (req, res) => {
     // TODO: add a comment to a video
-    const{videoId} = req.params
+    const {videoId} = req.params
   
     if(!videoId?.trim())
     {
         throw new apierror(400,"video id is missing");
     }
-    const {content} = req.body
+    const {content}= req.body;
     const userId = req.user._id;
+    if (!content?.trim()) {
+        throw new apierror(400, "Content is missing");
+    }
+    
      const comment = await Comment.create({
-            content,
+            content:content,
             video:videoId,
             owner:userId
      })
 
      if(!comment){
-        throw new apierror (400,"there is some problem");
+        throw new apierror (400,"there is some problem in adding comment controllers");
      }
      
      return res.status(200).json(
