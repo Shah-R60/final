@@ -8,15 +8,47 @@ import {asynchandler} from "../utils/asynchandler.js"
 
 const getVideoComments = asynchandler(async (req, res) => {
     //TODO: get all comments for a video
-    const {videoId} = req.params
-    const {page = 1, limit = 10} = req.query
+    const videoId = req.params.videoId
+    // console.log(typeof videoId)
+    // const {page = 1, limit = 10} = req.query
 
         if(!videoId?.trim())
         {
             throw new apierror(400,"videoId is missing");
         }
+        
 
-       const comment  =  await Comment.find({video:videoId});
+    //    const comment  =  await Comment.find({video:videoId});
+            const comment = await Comment.aggregate([
+                {
+                    $match:{
+                        // video:new mongoose.type.ObjectId(videoId)
+                        video:new mongoose.Types.ObjectId(videoId)
+                    }
+                },
+                {
+                    $lookup:{
+                        from:"users",
+                        localField:"owner",
+                        foreignField:"_id",
+                        as:"owner_detail",
+                        pipeline:[
+                            {
+                            $project:{
+                                avatar:1,
+                                fullname:1
+                            }
+                        }
+                    ]
+                    }                
+                }
+                // {
+                //     $project:{
+                //         avatar:1,
+                //         fullname:1
+                //     }
+                // }
+            ])
        if(!comment)
        {
         throw new apierror(400,"does not get comments");

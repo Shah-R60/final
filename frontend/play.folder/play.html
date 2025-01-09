@@ -1,163 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="play.style.css">
-     <title>Profile_page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="play.style.css">
+    <title>Profile_page</title>
 </head>
+
 <body>
-     <body >
-          <nav class="flex-div">
-              <div class="nav-left">
-                  <img src="/frontend/image.folder/menu.jpg" class="menu_icon">
-                  <img src="/frontend/image.folder/logo_light.png" class="logo_icon">
-              </div>
-      
- <!-- -------------------nav-mid------------- -->
 
- <div class="nav-middle">
-    <div class="search-box">
-            <input type="text" placeholder="Search" class="search_input" >
-        <img src="/frontend/image.folder/search.png" class="search_icon">
-    </div>
-    <img src="/frontend/image.folder/mike.png" class="mike_icon">
-</div>
+    <body>
+        <nav class="flex-div">
+            <div class="nav-left">
+                <img src="/frontend/image.folder/menu.jpg" class="menu_icon">
+                <img src="/frontend/image.folder/logo_light.png" class="logo_icon">
+            </div>
 
-<!-- -----nav-right--- -->
-        
-              <div class="nav-right ">
-                  <ul class="nav_ul">
-                      <li class="nav_li  upload_li">
-                          <img src="/frontend/image.folder/upload.png" class="upload">
-                          <div class="sub-class">
-                              <ul class="upload_ul">
-                                  <li><img src="/frontend/image.folder/upload_video.png" alt=""><a href="">Upload Video</a></li>
-                                  <li><img src="/frontend/image.folder/upload_post.png" alt=""><a href="">Upload Post</a></li>
-                              </ul>
-                          </div>
-                      </li>
-                      <li class="nav_li"><img src="/frontend/image.folder/notification.png" class="img2"></li>
-                      <li class="nav_li profile_li">
-                          <img src="/frontend/image.folder/avatar.jpg" id="avatar">
-                          <div class="profile_sub_class  ">
-                              <div class="profile_detail">
-                                 
-                                      <div class="profile_icon">
-                                          <img src="/frontend/image.folder/avatar.jpg" id="avatar" class="av">
-                                      </div>
-                                      <div class="profile_name">
-                                          <p class="fullName"> shahll rahul</p>
-                                          <p class="userName">shah-R60</p>
-                                          <a href="">View your channel</a>
-                                      </div>
-                              </div>
-                              <hr>
-                              <div class="logOut" style="color: black;">
-                                 <img src="/frontend/image.folder/logout.png" alt="logOut">
-                                 <h4>Sign Out</h4>
-                              </div> 
-                          </div>
-                      </li>
-                      <li class="nav_li" id="signInIcon" style="display: none;" ><button class="signInBtn"><img src="../frontend/image.folder/signin.png" id="avatar"><p>sign in</p></button></li>
-                  </ul> 
-              </div>
-          </nav>
-<!-- ---------------------------navbar---------------------------       -->
+            <!-- -------------------nav-mid------------- -->
 
-<!-- ---------------------------video--------------------------- -->
-    <div class="container play-container">
-        <div class="row">
-            <div class="play-video">
-                <video controls autoplay  class="videoControll">
-                    <source src="" type="video/mp4"  class="vid">
-                </video>
-                <div class="video_detail">
-                    <h3 class="video_title_element">
-                        Best Youtube channel to learn Web development
-                    </h3>
-                    <div class="channel_video_info">
-                        <div class="channel_detail">
-                            <img src="/frontend/image.folder/avatar.jpg" alt="avatar" class="channel_avatar">
-                            <div class="name_subscriber">
-                                <p class="name">Easy Tutorials</p>
-                                <p class="subscriber">589k subscriber</p>
-                            </div>
-                            <button class="subscriber_button">
-                                <img src="/frontend/image.folder/bell.png" alt="" class="subscriber_bell">
-                               <p class="subs">Subscribe</p>
-                            </button>
+            <div class="nav-middle">
+                <div class="search-box">
+                    <input type="text" placeholder="Search" class="search_input">
+                    <img src="/frontend/image.folder/search.png" class="search_icon">
+                </div>
+                <img src="/frontend/image.folder/mike.png" class="mike_icon">
+            </div>
+
+            <!-- -----nav-right--- -->
+
+            <div class="nav-right ">
+                <ul class="nav_ul">
+                    <li class="nav_li  upload_li">
+                        <img src="/frontend/image.folder/upload.png" class="upload">
+                        <div class="sub-class">
+                            <ul class="upload_ul">
+                                <li><img src="/frontend/image.folder/upload_video.png" alt=""><a href="">Upload
+                                        Video</a></li>
+                                <li><img src="/frontend/image.folder/upload_post.png" alt=""><a href="">Upload Post</a>
+                                </li>
+                            </ul>
                         </div>
-                        <div class="video_info">
-                            <div class="info_button">
-                                <a href="" class="like_button">
-                                    <img src="/frontend/image.folder/like.png">
-                                    <p class="like">125</p>
-                                </a>
-                                <img src="/frontend/image.folder/dislike.png">
+                    </li>
+                    <li class="nav_li"><img src="/frontend/image.folder/notification.png" class="img2"></li>
+                    <li class="nav_li profile_li">
+                        <img src="/frontend/image.folder/avatar.jpg" id="avatar">
+                        <div class="profile_sub_class  ">
+                            <div class="profile_detail">
+
+                                <div class="profile_icon">
+                                    <img src="/frontend/image.folder/avatar.jpg" id="avatar" class="av">
+                                </div>
+                                <div class="profile_name">
+                                    <p class="fullName"> shahll rahul</p>
+                                    <p class="userName">shah-R60</p>
+                                    <a href="">View your channel</a>
+                                </div>
                             </div>
-                            <div class="share">
-                                <img src="/frontend/image.folder/share.png">
-                                <p>share</p>
+                            <hr>
+                            <div class="logOut" style="color: black;">
+                                <img src="/frontend/image.folder/logout.png" alt="logOut">
+                                <h4>Sign Out</h4>
                             </div>
+                        </div>
+                    </li>
+                    <li class="nav_li" id="signInIcon" style="display: none;"><button class="signInBtn"><img
+                                src="../frontend/image.folder/signin.png" id="avatar">
+                            <p>sign in</p>
+                        </button></li>
+                </ul>
+            </div>
+        </nav>
+        <!-- ---------------------------navbar---------------------------       -->
+
+        <!-- ---------------------------video--------------------------- -->
+        <div class="container play-container">
+            <div class="row">
+                <div class="play-video">
+                    <video controls autoplay class="videoControll">
+                        <source src="" type="video/mp4" class="vid">
+                    </video>
+                    <div class="video_detail">
+                        <h3 class="video_title_element">
+                            Best Youtube channel to learn Web development
+                        </h3>
+                        <div class="channel_video_info">
+                            <div class="channel_detail">
+                                <img src="/frontend/image.folder/avatar.jpg" alt="avatar" class="channel_avatar">
+                                <div class="name_subscriber">
+                                    <p class="name">Easy Tutorials</p>
+                                    <p class="subscriber">589k subscriber</p>
+                                </div>
+                                <button class="subscriber_button">
+                                    <img src="/frontend/image.folder/bell.png" alt="" class="subscriber_bell">
+                                    <p class="subs">Subscribe</p>
+                                </button>
+                            </div>
+                            <div class="video_info">
+                                <div class="info_button">
+                                    <a href="" class="like_button">
+                                        <img src="/frontend/image.folder/like.png">
+                                        <p class="like">125</p>
+                                    </a>
+                                    <img src="/frontend/image.folder/dislike.png">
+                                </div>
+                                <div class="share">
+                                    <img src="/frontend/image.folder/share.png">
+                                    <p>share</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="vid-description">
+                        <p>channel that make learning easy</p>
+                        <p>Subscripe Easy Tutorials to watch more tutorial on wev development</p>
+                        <hr>
+                        <h4>134 comments</h4>
+                        <div class="add_comments">
+                            <img src="/frontend/image.folder/avatar.jpg" id="avatar">
+                            <div class="text_submit">
+                                <textarea name="" id="" placeholder="Write Comments..."
+                                    class="comment_input_element"></textarea>
+                                <!-- <textarea type="text" placeholder="Write comments..."> -->
+                                <!-- <hr style="background-color: blue; height: 20px;" > -->
+                                <button class="comment_button">comment</button>
+                            </div>
+
+                        </div>
+                        <!-- <hr> -->
+                        <div class="commentBox">
+                            <div class="old-comments">
+                                <div class="avatar_comment">
+                                    <img src="${commentar_avatar}" alt="">
+                                    <div style="width: 100%;">
+                                        <h3>${commentarName} <span>2 days ago</span></h3>
+                                        <p class="commment_p">${commentarContent}</p>
+                                        <div class="comment_reaction">
+                                            <div>
+                                                <div class="comment-action">
+                                                    <img src="/frontend/image.folder/like.png">
+                                                    <span>244</span>
+                                                    <img src="/frontend/image.folder/dislike.png">
+                                                    <span>2</span>
+                                                    <span>reply</span>
+                                                    <a href="">All reply</a>
+                                                </div>
+                                            </div>
+                                            <button class="comment_update_button" style="display: none;">Edit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="option">
+                                    <img src="/frontend/image.folder/option.png" alt="" class="edit_delete">
+                                    <div class="option_sub_class" id="${comment_id}">
+                                        <ul class="option_ul">
+                                            <li class="option_li commentEdit"><img src="/frontend/image.folder/edit.png"
+                                                    alt="">edit</li>
+                                            <li class="option_li comment_delete"><img
+                                                    src="/frontend/image.folder/delete.png" alt="">delete</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
-                <hr>      
-                 <div class="vid-description">
-                    <p>channel that make learning easy</p>
-                    <p>Subscripe Easy Tutorials to watch more tutorial on wev development</p>
-                    <hr>
-                    <h4>134 comments</h4>
-                     <div class="add_comments">
-                        <img src="/frontend/image.folder/avatar.jpg" id="avatar">
-                        <div class="text_submit">
-                            <textarea name="" id="" placeholder="Write Comments..." class="comment_input_element"></textarea>
-                            <!-- <textarea type="text" placeholder="Write comments..."> -->
-                            <!-- <hr style="background-color: blue; height: 20px;" > -->
-                             <button class="comment_button">comment</button>
-                        </div>
-                       
-                     </div>
-                     <!-- <hr> -->
-                      <div class="commentBox">
-                            <div class="old-comments">
-                                <img src="/frontend/image.folder/avatar.jpg" alt="">
-                                <div>
-                                    <h3>UserName <span>2 days ago</span></h3>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, velit ducimus?</p>
-                                    <div class="comment-action">
-                                        <img src="/frontend/image.folder/like.png">
-                                        <span>244</span>
-                                        <img src="/frontend/image.folder/dislike.png" >
-                                        <span>2</span>
-                                        <span>reply</span>
-                                        <a href="">All reply</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="old-comments">
-                                <img src="/frontend/image.folder/avatar.jpg" alt="">
-                                <div>
-                                    <h3>UserName <span>2 days ago</span></h3>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, velit ducimus?</p>
-                                    <div class="comment-action">
-                                        <img src="/frontend/image.folder/like.png">
-                                        <span>244</span>
-                                        <img src="/frontend/image.folder/dislike.png" >
-                                        <span>2</span>
-                                        <span>reply</span>
-                                        <a href="">All reply</a>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                 </div>
-            </div>
 
-            <!-- -------------------------sideVideos--------------------------- -->
-            <div class="right-sidebar">         
-                <!-- <div class="side-video-list">
+                <!-- -------------------------sideVideos--------------------------- -->
+                <div class="right-sidebar">
+                    <!-- <div class="side-video-list">
                     <a href="" class="small-thumbnail"><img src="/frontend/image.folder//thumbnail.jpg" ></a>
                      <div class="vid-info">
                         <a href="" class="">Best channel that help you to learn webdev</a>
@@ -165,12 +178,13 @@
                         <p>15k Views</p> 
                      </div>
                 </div> -->
+                </div>
             </div>
         </div>
-    </div>
 
 
-</body>
+    </body>
 
-<script src="play.script.js"></script>
+    <script src="play.script.js"></script>
+
 </html>

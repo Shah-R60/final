@@ -560,6 +560,7 @@ font-weight: bold;
 .old-comments{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     margin-bottom: 30px;
     border-bottom: 2px solid rgb(236, 236, 236);
 }
@@ -571,15 +572,16 @@ font-weight: bold;
 }
 
 .old-comments h3{
-    font-size: 14px;
+    font-size: 16px;
     margin-bottom: 2px;
 }
 
 .old-comments h3 span{
-    font-size: 12px;
+    font-size: 14px;
     color: #5a5a5a;
     font-weight: 8px;
     margin-left: 8px;
+    /* margin: 10px; */
 }
 
 .old-comments .comment-action{
@@ -602,6 +604,101 @@ font-weight: bold;
 
 .old-comments .comment-action a{
     color: #03113e;
+}
+
+.avatar_comment{
+    display: flex;
+}
+
+
+.avatar_comment{
+    width: 100%;
+    /* border: 2px solid red; */
+}
+.button_class{
+    display: flex;
+    width: 100%;
+    /* border: 2px solid red; */
+    justify-content: end;
+}
+
+.commment_p{
+    width: 100%;
+}
+
+.comment_reaction{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    /* border: 2px solid red; */
+    width: 100%;
+}
+
+
+.comment_reaction button{
+    width: 70px;
+    border: 2px solid black;
+    height: 20px;
+    border: 0px;
+    border-radius: 20px;
+    outline: 0px;
+    display: none;
+}
+
+.comment_update_button_dis{
+    display: block;
+}
+.option{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    /* background-color: black; */
+}
+
+.option_sub_class{
+    display: none;
+}
+
+.sub_class_click{
+    display: block;
+}
+
+.option_ul_click {
+    display: block; /* Change this to block to show the menu */
+}
+
+.option_ul {
+    /* display: none; */
+    position: absolute;
+    top: 40px;
+    list-style-type: none;
+    background-color: rgb(240, 240, 240);
+    border-radius: 7px;
+    padding: 5px;
+    width: 100px;
+    height: auto;
+}
+
+.option li{
+    margin-left: 5px;
+    margin-bottom: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.option_ul .option li img{
+    height: 17px;
+    width: 17px;
+}
+
+
+.option img{
+    width: 20px;
+    height: 20px;
+    margin-right: 10%;
+    margin-top: 10px;
 }
 
 
