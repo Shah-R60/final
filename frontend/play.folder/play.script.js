@@ -395,7 +395,7 @@ async function displayCommentsFun(event) {
                                         <div class="comment_reaction">
                                                     <div>
                                                                     <div class="comment-action">
-                                                                        <img src="/frontend/image.folder/like.png">
+                                                                        <img src="/frontend/image.folder/like.png" >
                                                                         <span>244</span>
                                                                         <img src="/frontend/image.folder/dislike.png" >
                                                                         <span>2</span>
@@ -538,4 +538,13 @@ edit_delete.onclick = function () {
 
 
 
+// like logic
 
+
+const likeButton = document.querySelector(".likeButton")
+const likeCount = document.querySelector('.likeCount')
+const dislikeButtonn = document.querySelector('.dislikeButtonn')
+
+likeButton.addEventListener("click",()=>{
+    
+})

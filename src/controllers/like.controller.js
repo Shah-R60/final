@@ -6,33 +6,42 @@ import {asynchandler} from "../utils/asynchandler.js"
 
 
 const toggleVideoLike = asynchandler(async (req, res) => {
-    const {videoId} = req.params
-    //TODO: toggle like on video
-    if(!videoId?.trim())
-    {
-        throw new apierror(400,"video id is missing");
+    try{
+                    const {videoId} = req.params
+                //TODO: toggle like on video
+                if(!videoId?.trim())
+                {
+                    throw new apierror(400,"video id is missing");
+                }
+
+                const existingLike = await Like.findOne({Video:videoId,likedBy:req.user?._id})
+                    if(!existingLike)
+                    {
+                    const videoResponse =  await Like.create({
+                            Video:videoId,
+                            likedBy:req.user?._id, 
+                        })
+
+                        res
+                        .status(201)
+                        .json(
+                            new apiresponse(200,videoResponse,"video toggle successfully")
+                        )
+                    }else
+                    {
+                        await Like.deleteOne({_id:existingLike._id});
+                        res.status(200).json(
+                        new apiresponse(200,null,"remove liked")
+                    )
+                    }
     }
-
-       const store = await Like.find({Video:videoId})
-       console.log(store.length);
-        if(store.length==0)
-        {
-           await Like.create({
-                Video:videoId,
-                likedBy:req.user?._id
-            })
-
-            res.status(200).json(
-                new apiresponse(200,"liked video")
-            )
-        }else{
-           await Like.deleteOne({Video:videoId});
-           res.status(200).json(
-            new apiresponse(200,"remove liked")
-        )
-        }
+    catch(err)
+    {
         
+        throw new apierror("eror",err)
+    }
 })
+
 
 const toggleCommentLike = asynchandler(async (req, res) => {
     const {commentId} = req.params
@@ -108,23 +117,39 @@ const getLikedVideos = asynchandler(async (req, res) => {
 })
 
 
-const getnoOfLike = asynchandler(async(req,res)=>{
-    const video_id = req.params._id;
-    const noOflike = await Like.aggregate([
+const getnoOfLike = asynchandler(async (req, res) => {
+    const video_id = req.params.video_id;
+    console.log(typeof video_id)
+
+
+    const noOflikes = await Like.find({Video:new mongoose.Types.ObjectId(video_id)}).countDocuments()
+
+    const islikedby = await Like.aggregate([
         {
             $match:{
-                Video:video_id
+                Video:new mongoose.Types.ObjectId(video_id),
             }
         },
-        
+        {
+            $match:{
+                likedBy:new mongoose.Types.ObjectId(req.user?._id)
+            }
+        }
     ])
-})
-
-
+    const response = {
+        noOflikes:noOflikes,
+        islikedby:islikedby.length>0
+    }
+    console.log(islikedby.length)
+    res.status(201).json(
+        new apiresponse(200,response, "Successfully fetched")
+    );
+});
 
 export {
     toggleVideoLike,
     toggleCommentLike,
     toggleTweetLike,
-    getLikedVideos
+    getLikedVideos,
+    getnoOfLike
 };
