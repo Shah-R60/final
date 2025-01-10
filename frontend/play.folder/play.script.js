@@ -376,7 +376,7 @@ async function displayCommentsFun(event) {
                 credentials:"include"
             });
             const displayCommentJson = await displayCommentResponse.json();
-            console.log(displayCommentJson.data);
+            // console.log(displayCommentJson.data);
             const commentBox = document.querySelector(".commentBox")
             let commentInnerHTML = "";
             displayCommentJson.data.forEach((element) => {
@@ -536,8 +536,6 @@ edit_delete.onclick = function () {
     option_sub_class.classList.toggle("sub_class_click");
 };
 
-
-
 // like logic
 
 
@@ -545,6 +543,68 @@ const likeButton = document.querySelector(".likeButton")
 const likeCount = document.querySelector('.likeCount')
 const dislikeButtonn = document.querySelector('.dislikeButtonn')
 
+async function noOfLikeFun(event) {
+    try{
+        const getnoOfLikeResponse = await fetch(`http://localhost:3000/api/v1/like/getnoOfLike/${videoId}`,{
+            method: 'GET',
+            credentials:"include"
+        })
+        const getnoOfLikeData = await getnoOfLikeResponse.json()
+        // console.log(getnoOfLikeData)
+        const noOfLike = getnoOfLikeData.data.noOflikes
+        const islikedby = getnoOfLikeData.data.islikedby
+        console.log(islikedby)
+        // console.log(noOfLike);
+        likeCount.textContent=`${noOfLike}`
+        if(islikedby)
+        {
+            likeButton.src="/frontend/image.folder/LikeAfterHit.png"
+        }
+    }catch(err)
+    {
+        console.log("error in like displaying function",err)
+    }
+}
+
+noOfLikeFun();
+
 likeButton.addEventListener("click",()=>{
-    
+    async function likeFun() {
+        try{
+            const toggleLikeResponse = await fetch(`http://localhost:3000/api/v1/like/toggle/v/${videoId}`,{
+                method: 'POST',
+                credentials:"include"
+            })
+            // console.log(toggleLikeResponse);
+            const togglelikedata = await toggleLikeResponse.json()
+            console.log(togglelikedata.data)
+            if(togglelikedata.data)
+            {
+                likeButton.src="/frontend/image.folder/likeAfterHit.png"
+                // console.log(likeCount.textContent)
+                let temp = likeCount.textContent;
+                temp++;
+                likeCount.textContent = temp;
+            }
+            else
+            {
+                // console.log(likeCount.textContent)
+                let temp = likeCount.textContent;
+                if(temp!=0)
+                {
+                    likeButton.src="/frontend/image.folder/like.png"
+                temp--;
+                likeCount.textContent = temp;
+                }
+                
+            }
+
+           
+
+        }catch(err){
+            console.log("error in like function",err)
+        }
+    }
+
+    likeFun();
 })
